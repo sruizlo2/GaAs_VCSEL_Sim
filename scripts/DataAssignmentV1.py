@@ -4,11 +4,11 @@ from matplotlib import pyplot as plt
 import numpy as np
 
 #loading files for pete
-path = 'C:/Users\petee\Dropbox (MIT)\classes\\3.46'
+path = '..\materials'
 os.chdir(path)
 
 #Loading files for sebastian
-# path = 'C:/Users\petee\Dropbox (MIT)\classes\\3.46'
+# path = 'materials'
 # os.chdir(path)
 
 for filename in [
