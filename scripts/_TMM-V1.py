@@ -136,12 +136,12 @@ TR = Trans_and_reflec
 TA = Transmitted_Angle
 
 #loading files for pete
-path = 'C:/Users\petee\Dropbox (MIT)\classes\\3.46'
-os.chdir(path)
+#path = 'C:/Users\petee\Dropbox (MIT)\classes\\3.46'
+#os.chdir(path)
 
 #Loading files for sebastian
-# path = 'C:/Users\petee\Dropbox (MIT)\classes\\3.46'
-# os.chdir(path)
+path = '..\materials'
+os.chdir(path)
 
 #Bragg Mirror Imputs
 n_pairs = 25; # Number of pairs of GaAs|AlGaAs layers
@@ -149,8 +149,8 @@ mat2 = "AlGaAs-X=0.452"
 mat1 = "GaAs"
 
 #Range of Interest
-wavelength_min = 400 #in nm
-wavelength_max = 1250 #in nm
+wavelength_min = 350 #in nm
+wavelength_max = 1350 #in nm
 wavelength_range = wavelength_max - wavelength_min
 wavelength_spectra = np.linspace(wavelength_min,wavelength_max,(wavelength_range+1))
 
@@ -254,7 +254,7 @@ for i in wavelength_spectra:
 #      system_TE_trans, system_TE_reflect = TR(transfer_matrix_TE_system)
 #      system_TM_trans, system_TM_reflect = TR(transfer_matrix_TM_system)
 reflec_spectra = []
-thickness = 850e-9 / 2 / 3.6  # lambda / 4 condition (per layer)
+thickness = 850e-9 / 2 / 3.4  # lambda / 4 condition (per layer)
 
 tallytest = 0
 for i in wavelength_spectra:

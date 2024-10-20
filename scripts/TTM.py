@@ -1,11 +1,11 @@
-import numpy as np
-
 # -*- coding: utf-8 -*-
 """
 Created on Fri Oct 18 20:24:48 2024
 
 @author: srulo
 """
+import numpy as np
+
 def Transmitted_Angle(index_of_refraction_in, index_of_refraction_out, angle_in=0):
     # Ration of indices of refraction
     indices_ratio = index_of_refraction_in / index_of_refraction_out;
@@ -22,7 +22,7 @@ def Layer_matrix(index_of_refraction_in, index_of_refraction_out, thickness, wav
     - index_of_refraction_in: Refractive index of the current layer
     - index_of_refraction_out: Refractive index of the next layer
     - thickness: Thickness of the layer (in meters)
-    - wavelength: Wavelength of the incident light (in meters)
+    - wavelength: Wavelength of the incident light (in meter)
     - theta_inc: Angle of incidence (in radians, default is normal incidence)
 
     Returns:

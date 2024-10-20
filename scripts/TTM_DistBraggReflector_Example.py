@@ -23,8 +23,8 @@ wavelength = 875e-9 # Nanometers
 thickness = wavelength / 2 / average_index # lambda / 4 condition (per layer)
 
 # Enter from GaAs
-#layers = [(index_2, wavelength / index_2)]
-layers = []
+layers = [(index_2, wavelength)]
+#layers = []
 
 for i in range(n_pairs):
     layer1 = (index_1, thickness / 2)
