@@ -29,8 +29,8 @@ mat_file_AlGaAs = 'AlGaAs-X=0.219'
 mat_file_AlAs = 'AlAs'
 
 # Design parameters
-target_reflectance_top = 0.995;
-target_reflectance_bottom = 0.95;
+target_reflectance_top = 0.95;
+target_reflectance_bottom = 0.995;
 # Materials parameters, n and K for design wavelegnth
 #index_Mat_GaAs_design, loss_Mat_GaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_GaAs))
 #index_Mat_AlGaAs_design, loss_Mat_AlGaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlGaAs))
@@ -49,7 +49,7 @@ index_Mat_AlAs, loss_Mat_AlAs = ReadMatFile(wavelengths, os.path.join(path_to_ma
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.array([23])
+n_pairs = np.array([14])
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -166,9 +166,9 @@ for n_pair in n_pairs:
     n_pair_index += 1
 
 # %%
-### TOP MIRROR
+### BOTTOM MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.array([14 + 0.5])
+n_pairs = np.array([23 + 0.5])
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -194,6 +194,10 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
 num_runs = 1
+
+# Total tickness
+total_thickness = thickness_ideal * (14 + 23.5) * 2 + wavelength_design / index_Mat_2_design
+print(f"Total thcikness: {total_thickness}")
 
 # Iterate over design configurations
 # Initialize variables

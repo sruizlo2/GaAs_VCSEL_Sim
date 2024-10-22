@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sat Oct 19 18:14:02 2024
+Created on Sun Oct 20 16:27:21 2024
 
 @author: srulo
 """
@@ -31,6 +31,7 @@ mat_file_AlAs = 'AlAs'
 # Design parameters
 target_reflectance_top = 0.95;
 target_reflectance_bottom = 0.995;
+thickness_error = 0.05
 # Materials parameters, n and K for design wavelegnth
 #index_Mat_GaAs_design, loss_Mat_GaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_GaAs))
 #index_Mat_AlGaAs_design, loss_Mat_AlGaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlGaAs))
@@ -74,7 +75,7 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 # Normal incidence
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
-num_runs = 1
+num_runs = 10
 
 # Iterate over design configurations
 # Initialize variables
@@ -106,7 +107,7 @@ for n_pair in n_pairs:
         DBR_TM_trans_run = []
         DBR_TM_reflect_run = []
         for run in range(num_runs):
-            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, 0.0, index_out)
+            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, thickness_error, index_out)
             # Transfer matrix (wavelegnth in meters!)
             transfer_matrix_TE_DBR, transfer_matrix_TM_DBR = TM(DBR_, wavelength, angle_inc)
             # Transmittance and Reflectance
@@ -199,8 +200,6 @@ average_index = (index_Mat_1_design + index_Mat_2_design) / 2
 thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (per layer)
 # Normal incidence
 angle_inc = 0
-# Number of runs to emulate non-ideal thicknesses
-num_runs = 1
 
 # Iterate over design configurations
 # Initialize variables
@@ -233,7 +232,7 @@ for n_pair in n_pairs:
         DBR_TM_reflect_run = []
         
         for run in range(num_runs):
-            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, 0.0, index_out)
+            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, thickness_error, index_out)
             # Transfer matrix (wavelegnth in meters!)
             transfer_matrix_TE_DBR, transfer_matrix_TM_DBR = TM(DBR_, wavelength, angle_inc)
             # Transmittance and Reflectance
@@ -289,7 +288,7 @@ for n_pair in n_pairs:
 # Reflectance versus number of layers
 DBR_TE_error_reflect_design = [4 * x for x in DBR_TE_std_reflect_design]
 plt.figure()
-plt.errorbar(n_pairs - 0.5, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
+plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
 #plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
 plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR target reflectance')
 plt.title('Bottom DBR mirro')

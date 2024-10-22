@@ -9,28 +9,32 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="299.09976mm"
-   height="114.39986mm"
-   viewBox="0 0 299.09976 114.39986"
+   width="283.82077mm"
+   height="118.6432mm"
+   viewBox="0 0 283.82077 118.64321"
    version="1.1"
    id="svg8"
    inkscape:version="0.92.5 (2060ec1f9f, 2020-04-08)"
-   sodipodi:docname="VCSEL_Schematic.svg">
+   sodipodi:docname="VCSEL_Schematic.svg"
+   inkscape:export-filename="I:\Documentos\GaAs_VCSEL_Sim\figures\VCSEL_Schematic.png"
+   inkscape:export-xdpi="96"
+   inkscape:export-ydpi="96">
   <defs
      id="defs2">
     <marker
        inkscape:stockid="TriangleInS"
        orient="auto"
-       refY="0.0"
-       refX="0.0"
+       refY="0"
+       refX="0"
        id="marker4139"
        style="overflow:visible"
        inkscape:isstock="true">
       <path
          id="path4137"
-         d="M 5.77,0.0 L -2.88,5.0 L -2.88,-5.0 L 5.77,0.0 z "
-         style="fill-rule:evenodd;stroke:#ff0000;stroke-width:1pt;stroke-opacity:1;fill:#ff0000;fill-opacity:1"
-         transform="scale(-0.2)" />
+         d="M 5.77,0 -2.88,5 V -5 Z"
+         style="fill:#ff0000;fill-opacity:1;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.00000003pt;stroke-opacity:1"
+         transform="scale(-0.2)"
+         inkscape:connector-curvature="0" />
     </marker>
     <marker
        inkscape:stockid="TriangleOutS"
@@ -175,9 +179,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.98994949"
-     inkscape:cx="543.0232"
-     inkscape:cy="200.87509"
+     inkscape:zoom="0.49497475"
+     inkscape:cx="433.6426"
+     inkscape:cy="368.37885"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -186,7 +190,7 @@
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     showguides="false"
+     showguides="true"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
@@ -207,7 +211,7 @@
      inkscape:label="Capa 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-38.78368,20.543778)">
+     transform="translate(-38.78368,20.216317)">
     <rect
        style="opacity:1;vector-effect:none;fill:#ff5555;fill-opacity:1;stroke:#000000;stroke-width:0.5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect815-2-0-7"
@@ -254,7 +258,7 @@
          y="43.38427"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332"><tspan
    style="fill:#87aade;fill-opacity:1"
-   id="tspan3370">AlGaAs:</tspan> Confinement layer</tspan></text>
+   id="tspan3370">AlGaAs|</tspan> Confinement layer</tspan></text>
     <rect
        style="opacity:1;vector-effect:none;fill:#87aade;fill-opacity:1;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect815-3"
@@ -265,14 +269,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="191.45999"
+       x="191.46689"
        y="35.609276"
        id="text849-3-6"
        inkscape:transform-center-x="-2.6458333"
        inkscape:transform-center-y="4.1577381"><tspan
          sodipodi:role="line"
          id="tspan847-1-4"
-         x="191.45999"
+         x="191.46689"
          y="35.609276"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332"><tspan
    style="fill:#ff5555"
@@ -334,8 +338,8 @@
        id="text2044"><tspan
          sodipodi:role="line"
          id="tspan2042"
-         x="-3.6462131"
-         y="73.333344"
+         x="-4.3961906"
+         y="74.083321"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:'cambria math';-inkscape-font-specification:'cambria math';writing-mode:tb-rl;stroke-width:0.26458332">...</tspan></text>
     <text
        xml:space="preserve"
@@ -345,8 +349,8 @@
        id="text2044-44"><tspan
          sodipodi:role="line"
          id="tspan2042-9"
-         x="63.286861"
-         y="73.333344"
+         x="62.536884"
+         y="74.083321"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:'cambria math';-inkscape-font-specification:'cambria math';writing-mode:tb-rl;stroke-width:0.26458332">...</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999994;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#TriangleInS-0);marker-end:url(#TriangleOutS-6)"
@@ -389,12 +393,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="191.85619"
+       x="191.62537"
        y="5.5487285"
        id="text849-0"><tspan
          sodipodi:role="line"
          id="tspan847-4"
-         x="191.85619"
+         x="191.62537"
          y="5.5487285"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332">p-doped<tspan
    style="fill:#87aade;fill-opacity:1"
@@ -409,12 +413,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="191.85619"
+       x="191.59091"
        y="61.567589"
        id="text849-0-5"><tspan
          sodipodi:role="line"
          id="tspan847-4-6"
-         x="191.85619"
+         x="191.59091"
          y="61.567589"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332">n-doped<tspan
    style="fill:#87aade;fill-opacity:1"
@@ -422,7 +426,7 @@
    style="fill:#b3b3b3"
    id="tspan3753">AlAs</tspan> <tspan
    style="fill:#000000"
-   id="tspan3751">/</tspan> AlGaAs:</tspan> Bottom DBR mirror</tspan></text>
+   id="tspan3751">/</tspan> AlGaAs</tspan>: Bottom DBR mirror</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:0.99999982;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 182.65699,43.875726 h 4.25223 v 35.714951 h -4.06324"
@@ -433,18 +437,18 @@
        id="rect815-4-4-6-0-4-3"
        width="149.5"
        height="12.729166"
-       x="40.22419"
-       y="80.876915" />
+       x="40.224186"
+       y="85.447723" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="191.46689"
-       y="89.644455"
+       x="191.59091"
+       y="93.536575"
        id="text849-0-5-7"><tspan
          sodipodi:role="line"
          id="tspan847-4-6-8"
-         x="191.46689"
-         y="89.644455"
+         x="191.59091"
+         y="93.536575"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332">n-doped<tspan
    style="fill:#ff5555"
    id="tspan3456"> GaA:</tspan> Substrate</tspan></text>
@@ -550,7 +554,8 @@
     <flowRoot
        xml:space="preserve"
        id="flowRoot3788"
-       style="fill:black;fill-opacity:1;stroke:none;font-family:Helvetica;font-style:normal;font-weight:normal;font-size:26.66666667px;line-height:1.25;letter-spacing:0px;word-spacing:0px;-inkscape-font-specification:Helvetica;font-stretch:normal;font-variant:normal"><flowRegion
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:26.66666603px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+       transform="matrix(0.26458333,0,0,0.26458333,38.78368,-20.543778)"><flowRegion
          id="flowRegion3790"><rect
            id="rect3792"
            width="95.714287"
@@ -574,12 +579,12 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
-       x="191.85619"
+       x="191.47379"
        y="-14.932858"
        id="text849-0-2"><tspan
          sodipodi:role="line"
          id="tspan847-4-8"
-         x="191.85619"
+         x="191.47379"
          y="-14.932858"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332">Metal contact</tspan></text>
     <text
@@ -590,8 +595,8 @@
        id="text2044-0"><tspan
          sodipodi:role="line"
          id="tspan2042-5"
-         x="-4.1823773"
-         y="160.74034"
+         x="-4.3961906"
+         y="160.95415"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:'cambria math';-inkscape-font-specification:'cambria math';writing-mode:tb-rl;stroke-width:0.26458332">...</tspan></text>
     <text
        xml:space="preserve"
@@ -601,14 +606,36 @@
        id="text2044-44-9"><tspan
          sodipodi:role="line"
          id="tspan2042-9-9"
-         x="62.750702"
-         y="160.74033"
+         x="62.536884"
+         y="160.95415"
          style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:12.69999981px;font-family:'cambria math';-inkscape-font-specification:'cambria math';writing-mode:tb-rl;stroke-width:0.26458332">...</tspan></text>
     <path
        style="opacity:0.25;fill:none;stroke:#ff0000;stroke-width:10;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#marker4139)"
-       d="m 114.97419,-6.0120176 0,40.0474346"
+       d="M 114.97419,-6.0120176 V 34.035417"
        id="path3879"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <rect
+       style="opacity:1;vector-effect:none;fill:#b3b3b3;fill-opacity:1;stroke:#000000;stroke-width:0.49999997;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect815-4-5-8-1-1-4"
+       width="133.46667"
+       height="4.5708055"
+       x="48.240849"
+       y="80.876915" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="191.59091"
+       y="84.886589"
+       id="text849-0-5-77"><tspan
+         sodipodi:role="line"
+         id="tspan847-4-6-9"
+         x="191.59091"
+         y="84.886589"
+         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458332">n-doped<tspan
+   style="fill:#87aade;fill-opacity:1;stroke-width:0.26458332"
+   id="tspan3380-1"> <tspan
+   style="fill:#b3b3b3;stroke-width:0.26458332"
+   id="tspan3753-8">AlAs</tspan></tspan>: Bottom DBR mirror</tspan></text>
   </g>
 </svg>
