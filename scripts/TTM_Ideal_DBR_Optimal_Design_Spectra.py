@@ -144,8 +144,8 @@ for n_pair in n_pairs:
     show_spectral_reflectance = True
     if show_spectral_reflectance:
         plt.figure()
-        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :],'k',label='R')
-        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :],'#87aadeff',label='T')
+        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
+        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :, 0],'#87aadeff',label='T')
         absorpt = 1 - DBR_TE_reflect[n_pair_index, :, 0] - DBR_TE_trans[n_pair_index, :, 0]
         plt.plot(wavelengths*1e9, absorpt,'#ff5555ff',label='A')
         plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k')
@@ -157,6 +157,7 @@ for n_pair in n_pairs:
         plt.xlabel('Wavelegnth (nm)')
         plt.ylabel('Reflectance')
         plt.title('Top DBR mirror')
+        plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance
@@ -268,18 +269,19 @@ for n_pair in n_pairs:
     show_spectral_reflectance = True
     if show_spectral_reflectance:
         plt.figure()
-        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :],'k',label='R')
-        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :],'#87aadeff',label='T')
+        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
+        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :, 0],'#87aadeff',label='T')
         absorpt = 1 - DBR_TE_reflect[n_pair_index, :, 0] - DBR_TE_trans[n_pair_index, :, 0]
         plt.plot(wavelengths*1e9, absorpt,'#ff5555ff',label='A')
         plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k')
         plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k')
         plt.xlim(wavelengths[0]*1e9, wavelengths[-1]*1e9)
-        plt.ylim(0, 1)
+        plt.ylim(0, 1.05)
         plt.grid()
         plt.xlabel('Wavelegnth (nm)')
         plt.ylabel('Reflectance')
         plt.title('Bottom DBR mirror')
+        plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance

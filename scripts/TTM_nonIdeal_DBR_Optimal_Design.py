@@ -15,7 +15,7 @@ import os
 
 # Define spectrum
 wavelength_design = 850e-9; # meters
-wavelength_range = 200e-9; # meters
+wavelength_range = 400e-9; # meters
 wavelegnth_step = 1e-9; # meters
 # Vector with testing wavelengths
 wavelengths = np.arange(wavelength_design - wavelength_range / 2,
@@ -50,7 +50,7 @@ index_Mat_AlAs, loss_Mat_AlAs = ReadMatFile(wavelengths, os.path.join(path_to_ma
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1)
+n_pairs = np.array([15]) #np.arange(2, 41, 1)
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -75,7 +75,7 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 # Normal incidence
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
-num_runs = 10
+num_runs = 100
 
 # Iterate over design configurations
 # Initialize variables
@@ -142,21 +142,30 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = False
+    show_spectral_reflectance = True
     if show_spectral_reflectance:
         plt.figure()
-        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R_TE')
-        plt.plot(wavelengths*1e9, DBR_TM_reflect[n_pair_index, :, 0],'b--',label='R_TM')
-        plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k', label = 'Design wavelength')
-        plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k', label = 'Top DBR target reflectance')
-        plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR Target reflectance')
+        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
+        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :, 0],'#87aadeff',label='T')
+        absorpt = 1 - DBR_TE_reflect[n_pair_index, :, 0] - DBR_TE_trans[n_pair_index, :, 0]
+        plt.plot(wavelengths*1e9, absorpt,'#ff5555ff',label='A')
+        plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k')
+        plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k')
         plt.xlim(wavelengths[0]*1e9, wavelengths[-1]*1e9)
-        plt.ylim(0, 1)
+        plt.ylim(0, 1.05)
+        plt.grid()
+        plt.xlabel('Wavelegnth (nm)')
+        plt.ylabel('Optical parameters')
+        plt.title('Tom DBR mirror')
+        plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
-    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect}")
+    this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
+    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
+    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
     # Next N
     n_pair_index += 1
 
@@ -170,13 +179,14 @@ plt.title(' Top DBR mirror')
 plt.xlabel('Number of alternating layers pairs')
 plt.ylabel('Reflectance')
 plt.ylim(0, 1.05)
+plt.xlim(0, 42)
 plt.grid()
 plt.show()
 
 # %%
-### TOP MIRROR
+### BOTTOM MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1) + 0.5
+n_pairs = np.array([26.5]) #np.arange(2, 41, 1) + 0.5
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -200,6 +210,10 @@ average_index = (index_Mat_1_design + index_Mat_2_design) / 2
 thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (per layer)
 # Normal incidence
 angle_inc = 0
+
+# Total tickness
+total_thickness = thickness_ideal * (15 + 26.5) * 2 + wavelength_design / index_Mat_2_design
+print(f"Total thcikness: {total_thickness}")
 
 # Iterate over design configurations
 # Initialize variables
@@ -267,21 +281,31 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = False
+    show_spectral_reflectance = True
+    print(show_spectral_reflectance)
     if show_spectral_reflectance:
         plt.figure()
-        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R_TE')
-        plt.plot(wavelengths*1e9, DBR_TM_reflect[n_pair_index, :, 0],'b--',label='R_TM')
-        plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k', label = 'Design wavelength')
-        plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k', label = 'Top DBR target reflectance')
-        plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR Target reflectance')
+        plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
+        plt.plot(wavelengths*1e9, DBR_TE_trans[n_pair_index, :, 0],'#87aadeff',label='T')
+        absorpt = 1 - DBR_TE_reflect[n_pair_index, :, 0] - DBR_TE_trans[n_pair_index, :, 0]
+        plt.plot(wavelengths*1e9, absorpt,'#ff5555ff',label='A')
+        plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k')
+        plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k')
         plt.xlim(wavelengths[0]*1e9, wavelengths[-1]*1e9)
-        plt.ylim(0, 1)
+        plt.ylim(0, 1.05)
+        plt.grid()
+        plt.xlabel('Wavelegnth (nm)')
+        plt.ylabel('Optical parameters')
+        plt.title('Bottom DBR mirror')
+        plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
-    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect}")
+    this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
+    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
+    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
     # Next N
     n_pair_index += 1
     
@@ -295,5 +319,6 @@ plt.title('Bottom DBR mirro')
 plt.xlabel('Number of alternating layers pairs')
 plt.ylabel('Reflectance')
 plt.ylim(0, 1.05)
+plt.xlim(0, 42)
 plt.grid()
 plt.show()
