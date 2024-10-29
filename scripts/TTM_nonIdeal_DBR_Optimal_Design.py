@@ -13,6 +13,9 @@ from MatFileLoader import Read_mat_file as ReadMatFile
 from CreateDBR import Create_DBR as DBR
 import os
 
+# Plotting options
+plt.rcParams.update({'font.size': 18})
+
 # Define spectrum
 wavelength_design = 850e-9; # meters
 wavelength_range = 400e-9; # meters
@@ -50,7 +53,7 @@ index_Mat_AlAs, loss_Mat_AlAs = ReadMatFile(wavelengths, os.path.join(path_to_ma
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.array([15]) #np.arange(2, 41, 1)
+n_pairs = np.arange(2, 41, 1) #np.array([15])
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -142,7 +145,7 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = True
+    show_spectral_reflectance = False
     if show_spectral_reflectance:
         plt.figure()
         plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
@@ -186,7 +189,7 @@ plt.show()
 # %%
 ### BOTTOM MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.array([26.5]) #np.arange(2, 41, 1) + 0.5
+n_pairs = np.arange(2, 41, 1) + 0.5 # np.array([26.5])
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs
 loss_Mat_in = loss_Mat_AlGaAs
@@ -281,7 +284,7 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = True
+    show_spectral_reflectance = False
     print(show_spectral_reflectance)
     if show_spectral_reflectance:
         plt.figure()

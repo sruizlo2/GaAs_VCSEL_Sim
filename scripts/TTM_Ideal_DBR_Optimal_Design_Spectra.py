@@ -13,6 +13,9 @@ from MatFileLoader import Read_mat_file as ReadMatFile
 from CreateDBR import Create_DBR as DBR
 import os
 
+# Plotting options
+plt.rcParams.update({'font.size': 18})
+
 # Define spectrum
 wavelength_design = 850e-9; # meters
 wavelength_range = 400e-9; # meters

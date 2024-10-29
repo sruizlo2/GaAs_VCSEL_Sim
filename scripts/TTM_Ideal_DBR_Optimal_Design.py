@@ -13,6 +13,9 @@ from MatFileLoader import Read_mat_file as ReadMatFile
 from CreateDBR import Create_DBR as DBR
 import os
 
+# Plotting options
+plt.rcParams.update({'font.size': 18})
+
 # Define spectrum
 wavelength_design = 850e-9; # meters
 wavelength_range = 200e-9; # meters
@@ -166,7 +169,7 @@ plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_desi
 #plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
 plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k', label = 'Top DBR target reflectance')
 plt.title(' Top DBR mirror')
-plt.xlabel('Number of alternating layers pairs')
+plt.xlabel('Number of layer pairs')
 plt.ylabel('Reflectance')
 plt.ylim(0, 1.05)
 plt.grid()
@@ -292,8 +295,8 @@ plt.figure()
 plt.errorbar(n_pairs - 0.5, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
 #plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
 plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR target reflectance')
-plt.title('Bottom DBR mirro')
-plt.xlabel('Number of alternating layers pairs')
+plt.title('Bottom DBR mirror')
+plt.xlabel('Number of layer pairs')
 plt.ylabel('Reflectance')
 plt.ylim(0, 1.05)
 plt.grid()
