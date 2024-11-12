@@ -20,7 +20,7 @@ plt.rcParams.update({'font.size': 18})
 
 # Define spectrum
 wavelength_design = 850e-9; # meters
-wavelength_range = 2e-9; # meters
+wavelength_range = 4e-9; # meters
 wavelegnth_step = 1e-9; # meters
 # Vector with testing wavelengths
 wavelengths = np.arange(wavelength_design - wavelength_range / 2,
@@ -45,29 +45,34 @@ index_Mat_AlGaAs_undoped, loss_Mat_AlGaAs_undoped = ReadMatFile(wavelengths, os.
 index_Mat_AlAs_undoped, loss_Mat_AlAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
 
 # Doping properties
-charge_density_e = 3e18 * 1e6 # Electrons
-charge_density_h = 3e18 * 1e6 # Holes
+charge_density_e = 5e18 * 1e6 # Electrons
+charge_density_h = 5e18 * 1e6 # Holes
 effective_mass_e_GaAs = 0.063 # Electrons
 effective_mass_h_GaAs = 0.57 # Holes
 effective_mass_e_AlAs = 0.15 # Electrons
 effective_mass_h_AlAs = 0.76 # Holes
-effective_mass_e_AlGaAs = 0.063 + Al_concentration * 0.087 # Electrons
-effective_mass_h_AlGaAs = 0.57 + Al_concentration * 0.19 # Holes
-damping_freq = 1e14
+effective_mass_e_AlGaAs = 0.063 + (0.087 * Al_concentration) # Electrons
+effective_mass_h_AlGaAs = 0.57 + (0.19 * Al_concentration) # Holes
+damping_freq_e_GaAs = 1.03e13
+damping_freq_h_GaAs = 1.71e13
+damping_freq_e_AlGaAs = 9.24e12 # ?????
+damping_freq_h_AlGaAs = 1.76e13
+damping_freq_e_AlAs = 6.51e13
+damping_freq_h_AlAs = 2.31e13
 
 # Total optical properties
 index_Mat_GaAs_p_doped, loss_Mat_GaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
-                                               charge_density_h, effective_mass_h_GaAs, damping_freq, False)
+                                               charge_density_h, effective_mass_h_GaAs, damping_freq_h_GaAs, False)
 index_Mat_AlGaAs_p_doped, loss_Mat_AlGaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
-                                               charge_density_h, effective_mass_h_AlGaAs, damping_freq, False)
+                                               charge_density_h, effective_mass_h_AlGaAs, damping_freq_h_AlGaAs, False)
 index_Mat_AlAs_p_doped, loss_Mat_AlAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
-                                               charge_density_h, effective_mass_h_AlAs, damping_freq, False)
+                                               charge_density_h, effective_mass_h_AlAs, damping_freq_h_AlAs, False)
 index_Mat_GaAs_n_doped, loss_Mat_GaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
-                                               charge_density_e, effective_mass_e_GaAs, damping_freq, False)
+                                               charge_density_e, effective_mass_e_GaAs, damping_freq_e_GaAs, False)
 index_Mat_AlGaAs_n_doped, loss_Mat_AlGaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
-                                               charge_density_e, effective_mass_e_AlGaAs, damping_freq, False)
+                                               charge_density_e, effective_mass_e_AlGaAs, damping_freq_e_AlGaAs, False)
 index_Mat_AlAs_n_doped, loss_Mat_AlAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
-                                               charge_density_e, effective_mass_e_AlAs, damping_freq, False)
+                                               charge_density_e, effective_mass_e_AlAs, damping_freq_e_AlAs, False)
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
@@ -96,7 +101,7 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 # Normal incidence
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
-num_runs = 1000
+num_runs = 100
 
 # Iterate over design configurations
 # Initialize variables

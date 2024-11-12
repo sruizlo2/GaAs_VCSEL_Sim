@@ -52,11 +52,11 @@ effective_mass_e_AlAs = 0.15 # Electrons
 effective_mass_h_AlAs = 0.76 # Holes
 effective_mass_e_AlGaAs = 0.063 + (0.087 * Al_concentration) # Electrons
 effective_mass_h_AlGaAs = 0.57 + (0.19 * Al_concentration) # Holes
-damping_freq_e_GaAs = 1e13
+damping_freq_e_GaAs = 1.03e13
 damping_freq_h_GaAs = 1.71e13
-damping_freq_e_AlGaAs = 1e13 #?????
+damping_freq_e_AlGaAs = 1.38e14 #?????
 damping_freq_h_AlGaAs = 1.76e13
-damping_freq_e_AlAs = 1.27e13
+damping_freq_e_AlAs = 6.51e13
 damping_freq_h_AlAs = 2.31e13
 
 # Total optical properties
