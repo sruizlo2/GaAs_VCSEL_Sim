@@ -28,7 +28,7 @@ wavelength_design_index = np.argwhere(abs(wavelengths - wavelength_design) < 1e-
 # Path to materials files
 path_to_mat_files = '../materials'
 mat_file_GaAs = 'GaAs'
-mat_file_AlGaAs = 'AlGaAs-X=0.219'
+mat_file_AlGaAs = 'AlGaAs-X=0.097'
 mat_file_AlAs = 'AlAs'
 
 # Design parameters

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Oct 20 16:27:21 2024
+Created on Sat Nov  9 12:45:36 2024
 
 @author: srulo
 """
@@ -10,6 +10,8 @@ from matplotlib import pyplot as plt
 from TTM import Transfer_matrix_system as TM
 from TTM import Trans_and_reflec as TR
 from MatFileLoader import Read_mat_file as ReadMatFile
+from MatFileLoader import Relative_permitivity_free_charge_carrier as RelPermFCC
+from MatFileLoader import Read_mat_file_Add_DSMOdel as ReadMatFileFCC
 from CreateDBR import Create_DBR as DBR
 import os
 
@@ -28,40 +30,56 @@ wavelength_design_index = np.argwhere(abs(wavelengths - wavelength_design) < 1e-
 # Path to materials files
 path_to_mat_files = '../materials'
 mat_file_GaAs = 'GaAs'
-mat_file_AlGaAs = 'AlGaAs-X=0.219'
+Al_concentration = 0.097 # 0.097
+mat_file_AlGaAs = 'AlGaAs-X=' + str(Al_concentration)
 mat_file_AlAs = 'AlAs'
 
 # Design parameters
 target_reflectance_top = 0.95;
 target_reflectance_bottom = 0.995;
 thickness_error = 0.05
-# Materials parameters, n and K for design wavelegnth
-#index_Mat_GaAs_design, loss_Mat_GaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_GaAs))
-#index_Mat_AlGaAs_design, loss_Mat_AlGaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlGaAs))
-#index_Mat_AlAs_design, loss_Mat_AlAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlAs))
 
 # Load materials parameters, n and K for all wavelength
-index_Mat_GaAs, loss_Mat_GaAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), False)
-index_Mat_AlGaAs, loss_Mat_AlGaAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs))
-index_Mat_AlAs, loss_Mat_AlAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
+index_Mat_GaAs_undoped, loss_Mat_GaAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), False)
+index_Mat_AlGaAs_undoped, loss_Mat_AlGaAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs))
+index_Mat_AlAs_undoped, loss_Mat_AlAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
 
-# Plot spectral reflectance for this design
-#plt.figure()
-#plt.plot(wavelengths,index_Mat_1,label='n')
-#plt.plot(wavelengths,index_Mat_2,label='R_TM')
-#plt.show
+# Doping properties
+charge_density_e = 3e18 * 1e6 # Electrons
+charge_density_h = 3e18 * 1e6 # Holes
+effective_mass_e_GaAs = 0.063 # Electrons
+effective_mass_h_GaAs = 0.57 # Holes
+effective_mass_e_AlAs = 0.15 # Electrons
+effective_mass_h_AlAs = 0.76 # Holes
+effective_mass_e_AlGaAs = 0.063 + Al_concentration * 0.087 # Electrons
+effective_mass_h_AlGaAs = 0.57 + Al_concentration * 0.19 # Holes
+damping_freq = 1e14
+
+# Total optical properties
+index_Mat_GaAs_p_doped, loss_Mat_GaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
+                                               charge_density_h, effective_mass_h_GaAs, damping_freq, False)
+index_Mat_AlGaAs_p_doped, loss_Mat_AlGaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
+                                               charge_density_h, effective_mass_h_AlGaAs, damping_freq, False)
+index_Mat_AlAs_p_doped, loss_Mat_AlAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
+                                               charge_density_h, effective_mass_h_AlAs, damping_freq, False)
+index_Mat_GaAs_n_doped, loss_Mat_GaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
+                                               charge_density_e, effective_mass_e_GaAs, damping_freq, False)
+index_Mat_AlGaAs_n_doped, loss_Mat_AlGaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
+                                               charge_density_e, effective_mass_e_AlGaAs, damping_freq, False)
+index_Mat_AlAs_n_doped, loss_Mat_AlAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
+                                               charge_density_e, effective_mass_e_AlAs, damping_freq, False)
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
 n_pairs = np.arange(2, 41, 1) #np.array([15])
 # Set indices of refraction for input layer
-index_Mat_in = index_Mat_AlGaAs
-loss_Mat_in = loss_Mat_AlGaAs
+index_Mat_in = index_Mat_AlGaAs_undoped
+loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs
-loss_Mat_1 = loss_Mat_AlAs
-index_Mat_2 = index_Mat_AlGaAs
-loss_Mat_2 = loss_Mat_AlGaAs
+index_Mat_1 = index_Mat_AlAs_n_doped
+loss_Mat_1 = loss_Mat_AlAs_n_doped
+index_Mat_2 = index_Mat_AlGaAs_n_doped
+loss_Mat_2 = loss_Mat_AlGaAs_n_doped
 # Set indices of refraction for output layer
 index_Mat_out = np.ones(wavelengths.shape[0]) # Air
 loss_Mat_out = np.zeros(wavelengths.shape[0]) # Air
@@ -191,16 +209,16 @@ plt.show()
 # Vector with testing number of layer pairs
 n_pairs = np.arange(2, 41, 1) + 0.5 # np.array([26.5])
 # Set indices of refraction for input layer
-index_Mat_in = index_Mat_AlGaAs
-loss_Mat_in = loss_Mat_AlGaAs
+index_Mat_in = index_Mat_AlGaAs_undoped
+loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs
-loss_Mat_1 = loss_Mat_AlAs
-index_Mat_2 = index_Mat_AlGaAs
-loss_Mat_2 = loss_Mat_AlGaAs
+index_Mat_1 = index_Mat_AlAs_p_doped
+loss_Mat_1 = loss_Mat_AlAs_p_doped
+index_Mat_2 = index_Mat_AlGaAs_p_doped
+loss_Mat_2 = loss_Mat_AlGaAs_p_doped
 # Set indices of refraction for output layer
-index_Mat_out = index_Mat_GaAs # Air
-loss_Mat_out = index_Mat_GaAs # Air
+index_Mat_out = index_Mat_GaAs_p_doped # Substrate
+loss_Mat_out = index_Mat_GaAs_p_doped # Substrate
 
 # Set parameters for design wavelength
 index_Mat_1_design = index_Mat_1[wavelength_design_index]

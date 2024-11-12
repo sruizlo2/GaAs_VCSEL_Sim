@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Created on Sun Oct 20 16:27:21 2024
+Created on Thu Nov  7 17:31:35 2024
 
 @author: srulo
 """
@@ -10,6 +10,8 @@ from matplotlib import pyplot as plt
 from TTM import Transfer_matrix_system as TM
 from TTM import Trans_and_reflec as TR
 from MatFileLoader import Read_mat_file as ReadMatFile
+from MatFileLoader import Relative_permitivity_free_charge_carrier as RelPermFCC
+from MatFileLoader import Read_mat_file_Add_DSMOdel as ReadMatFileFCC
 from CreateDBR import Create_DBR as DBR
 import os
 
@@ -28,43 +30,93 @@ wavelength_design_index = np.argwhere(abs(wavelengths - wavelength_design) < 1e-
 # Path to materials files
 path_to_mat_files = '../materials'
 mat_file_GaAs = 'GaAs'
-mat_file_AlGaAs = 'AlGaAs-X=0.219'
+Al_concentration = 0.097 # 0.097  0.219
+mat_file_AlGaAs = 'AlGaAs-X=' + str(Al_concentration)
 mat_file_AlAs = 'AlAs'
 
 # Design parameters
 target_reflectance_top = 0.95;
 target_reflectance_bottom = 0.995;
-thickness_error = 0.05
-# Materials parameters, n and K for design wavelegnth
-#index_Mat_GaAs_design, loss_Mat_GaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_GaAs))
-#index_Mat_AlGaAs_design, loss_Mat_AlGaAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlGaAs))
-#index_Mat_AlAs_design, loss_Mat_AlAs_design = ReadMatFile(wavelength_design, os.path.join(path_to_mat_files, mat_file_AlAs))
 
 # Load materials parameters, n and K for all wavelength
-index_Mat_GaAs, loss_Mat_GaAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), False)
-index_Mat_AlGaAs, loss_Mat_AlGaAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs))
-index_Mat_AlAs, loss_Mat_AlAs = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
+index_Mat_GaAs_undoped, loss_Mat_GaAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), False)
+index_Mat_AlGaAs_undoped, loss_Mat_AlGaAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs))
+index_Mat_AlAs_undoped, loss_Mat_AlAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
 
-# Plot spectral reflectance for this design
-#plt.figure()
-#plt.plot(wavelengths,index_Mat_1,label='n')
-#plt.plot(wavelengths,index_Mat_2,label='R_TM')
-#plt.show
+# Doping properties
+charge_density_e = 5e18 * 1e6 # Electrons
+charge_density_h = 5e18 * 1e6 # Holes
+effective_mass_e_GaAs = 0.063 # Electrons
+effective_mass_h_GaAs = 0.57 # Holes
+effective_mass_e_AlAs = 0.15 # Electrons
+effective_mass_h_AlAs = 0.76 # Holes
+effective_mass_e_AlGaAs = 0.063 + (0.087 * Al_concentration) # Electrons
+effective_mass_h_AlGaAs = 0.57 + (0.19 * Al_concentration) # Holes
+damping_freq_e_GaAs = 1e13
+damping_freq_h_GaAs = 1.71e13
+damping_freq_e_AlGaAs = 1e13 #?????
+damping_freq_h_AlGaAs = 1.76e13
+damping_freq_e_AlAs = 1.27e13
+damping_freq_h_AlAs = 2.31e13
+
+# Total optical properties
+index_Mat_GaAs_p_doped, loss_Mat_GaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
+                                               charge_density_h, effective_mass_h_GaAs, damping_freq_h_GaAs, False)
+index_Mat_AlGaAs_p_doped, loss_Mat_AlGaAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
+                                               charge_density_h, effective_mass_h_AlGaAs, damping_freq_h_AlGaAs, False)
+index_Mat_AlAs_p_doped, loss_Mat_AlAs_p_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
+                                               charge_density_h, effective_mass_h_AlAs, damping_freq_h_AlAs, False)
+index_Mat_GaAs_n_doped, loss_Mat_GaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), 
+                                               charge_density_e, effective_mass_e_GaAs, damping_freq_e_GaAs, False)
+index_Mat_AlGaAs_n_doped, loss_Mat_AlGaAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlGaAs), 
+                                               charge_density_e, effective_mass_e_AlGaAs, damping_freq_e_AlGaAs, False)
+index_Mat_AlAs_n_doped, loss_Mat_AlAs_n_doped = ReadMatFileFCC(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs), 
+                                               charge_density_e, effective_mass_e_AlAs, damping_freq_e_AlAs, False)
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1) #np.array([15])
+n_pairs = np.array([14])
 # Set indices of refraction for input layer
-index_Mat_in = index_Mat_AlGaAs
-loss_Mat_in = loss_Mat_AlGaAs
+index_Mat_in = index_Mat_AlGaAs_undoped
+loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs
-loss_Mat_1 = loss_Mat_AlAs
-index_Mat_2 = index_Mat_AlGaAs
-loss_Mat_2 = loss_Mat_AlGaAs
+index_Mat_1 = index_Mat_AlAs_p_doped
+loss_Mat_1 = loss_Mat_AlAs_p_doped
+index_Mat_2 = index_Mat_AlGaAs_p_doped
+loss_Mat_2 = loss_Mat_AlGaAs_p_doped
 # Set indices of refraction for output layer
 index_Mat_out = np.ones(wavelengths.shape[0]) # Air
 loss_Mat_out = np.zeros(wavelengths.shape[0]) # Air
+
+# Plot complex-valued index of refraction without and with FCC
+LW = 1;
+plt.figure()
+#plt.plot(wavelengths * 1e9,index_Mat_GaAs_undoped, 'b', label='GaAs undoped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_GaAs_p_doped, 'b--', label='GaAs p-doped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_GaAs_n_doped, 'b-.', label='GaAs n-doped', linewidth=LW)
+#plt.plot(wavelengths * 1e9,index_Mat_AlGaAs_undoped, 'r', label='AlGaAs undoped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_AlGaAs_p_doped, 'r--', label='AlGaAs p-doped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_AlGaAs_n_doped, 'r-.', label='AlGaAs n-doped', linewidth=LW)
+#plt.plot(wavelengths * 1e9,index_Mat_AlAs_undoped, 'k', label='AlAs undoped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_AlAs_p_doped, 'k--', label='AlAs p-doped', linewidth=LW)
+plt.plot(wavelengths * 1e9,index_Mat_AlAs_n_doped, 'k-.', label='AlAs n-doped', linewidth=LW)
+plt.legend(fontsize="10")
+plt.show()
+print(f"Delta N: p-(AlGaAs/AlAs) {index_Mat_AlGaAs_p_doped[wavelength_design_index] - index_Mat_AlAs_p_doped[wavelength_design_index]}")
+print(f"Delta N: n-(AlGaAs/AlAs) {index_Mat_AlGaAs_n_doped[wavelength_design_index] - index_Mat_AlAs_n_doped[wavelength_design_index]}")
+
+plt.figure()
+#plt.plot(wavelengths * 1e9, loss_Mat_GaAs_undoped, 'b-', label='GaAs undoped', linewidth=LW)
+#plt.plot(wavelengths * 1e9, loss_Mat_GaAs_p_doped, 'b--', label='GaAs p-doped', linewidth=LW)
+#plt.plot(wavelengths * 1e9, loss_Mat_GaAs_n_doped, 'b-.', label='GaAs n-doped', linewidth=LW)
+#plt.plot(wavelengths * 1e9, loss_Mat_AlGaAs_undoped, 'r-', label='AlGaAs undoped', linewidth=LW)
+plt.plot(wavelengths * 1e9, loss_Mat_AlGaAs_p_doped, 'r--', label='AlGaAs p-doped', linewidth=LW)
+plt.plot(wavelengths * 1e9, loss_Mat_AlGaAs_n_doped, 'r-.', label='AlGaAs n-doped', linewidth=LW)
+#plt.plot(wavelengths * 1e9, loss_Mat_AlAs_undoped, 'k-', label='AlAs undoped', linewidth=LW)
+plt.plot(wavelengths * 1e9, loss_Mat_AlAs_p_doped, 'k--', label='AlAs p-doped', linewidth=LW)
+plt.plot(wavelengths * 1e9, loss_Mat_AlAs_n_doped, 'k-.', label='AlAs n-doped', linewidth=LW)
+plt.legend(fontsize="10")
+plt.show()
 
 # Set parameters for design wavelength
 index_Mat_1_design = index_Mat_1[wavelength_design_index]
@@ -78,7 +130,7 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 # Normal incidence
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
-num_runs = 1000
+num_runs = 1
 
 # Iterate over design configurations
 # Initialize variables
@@ -110,7 +162,7 @@ for n_pair in n_pairs:
         DBR_TM_trans_run = []
         DBR_TM_reflect_run = []
         for run in range(num_runs):
-            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, thickness_error, index_out)
+            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, 0.0, index_out)
             # Transfer matrix (wavelegnth in meters!)
             transfer_matrix_TE_DBR, transfer_matrix_TM_DBR = TM(DBR_, wavelength, angle_inc)
             # Transmittance and Reflectance
@@ -145,7 +197,7 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = False
+    show_spectral_reflectance = True
     if show_spectral_reflectance:
         plt.figure()
         plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
@@ -154,53 +206,37 @@ for n_pair in n_pairs:
         plt.plot(wavelengths*1e9, absorpt,'#ff5555ff',label='A')
         plt.axvline(x = wavelength_design*1e9, linestyle = '--', color = 'k')
         plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k')
+        # plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR Target reflectance')
         plt.xlim(wavelengths[0]*1e9, wavelengths[-1]*1e9)
         plt.ylim(0, 1.05)
         plt.grid()
         plt.xlabel('Wavelegnth (nm)')
-        plt.ylabel('Optical parameters')
-        plt.title('Tom DBR mirror')
+        plt.ylabel('Reflectance')
+        plt.title('Top DBR mirror')
         plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
-    this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
-    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
-    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
-    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
+    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect}")
     # Next N
     n_pair_index += 1
-
-# Reflectance versus number of layers
-DBR_TE_error_reflect_design = [4 * x for x in DBR_TE_std_reflect_design]
-plt.figure()
-plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
-#plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
-plt.axhline(y = target_reflectance_top, linestyle = '--', color = 'k', label = 'Top DBR target reflectance')
-plt.title(' Top DBR mirror')
-plt.xlabel('Number of alternating layers pairs')
-plt.ylabel('Reflectance')
-plt.ylim(0, 1.05)
-plt.xlim(0, 42)
-plt.grid()
-plt.show()
 
 # %%
 ### BOTTOM MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1) + 0.5 # np.array([26.5])
+n_pairs = np.array([23 + 0.5])
 # Set indices of refraction for input layer
-index_Mat_in = index_Mat_AlGaAs
-loss_Mat_in = loss_Mat_AlGaAs
+index_Mat_in = index_Mat_AlGaAs_undoped
+loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs
-loss_Mat_1 = loss_Mat_AlAs
-index_Mat_2 = index_Mat_AlGaAs
-loss_Mat_2 = loss_Mat_AlGaAs
+index_Mat_1 = index_Mat_AlAs_n_doped
+loss_Mat_1 = loss_Mat_AlAs_n_doped
+index_Mat_2 = index_Mat_AlGaAs_n_doped
+loss_Mat_2 = loss_Mat_AlGaAs_n_doped
 # Set indices of refraction for output layer
-index_Mat_out = index_Mat_GaAs # Air
-loss_Mat_out = index_Mat_GaAs # Air
+index_Mat_out = index_Mat_GaAs_n_doped # Substrate
+loss_Mat_out = index_Mat_GaAs_n_doped # Substrate
 
 # Set parameters for design wavelength
 index_Mat_1_design = index_Mat_1[wavelength_design_index]
@@ -213,9 +249,11 @@ average_index = (index_Mat_1_design + index_Mat_2_design) / 2
 thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (per layer)
 # Normal incidence
 angle_inc = 0
+# Number of runs to emulate non-ideal thicknesses
+num_runs = 1
 
 # Total tickness
-total_thickness = thickness_ideal * (15 + 26.5) * 2 + wavelength_design / index_Mat_2_design
+total_thickness = thickness_ideal * (14 + 23.5) * 2 + wavelength_design / index_Mat_2_design
 print(f"Total thcikness: {total_thickness}")
 
 # Iterate over design configurations
@@ -249,7 +287,7 @@ for n_pair in n_pairs:
         DBR_TM_reflect_run = []
         
         for run in range(num_runs):
-            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, thickness_error, index_out)
+            DBR_ = DBR(n_pair, index_in, index_1, index_2, thickness_ideal, 0.0, index_out)
             # Transfer matrix (wavelegnth in meters!)
             transfer_matrix_TE_DBR, transfer_matrix_TM_DBR = TM(DBR_, wavelength, angle_inc)
             # Transmittance and Reflectance
@@ -284,8 +322,7 @@ for n_pair in n_pairs:
     DBR_TM_std_reflect_design.append(DBR_TM_reflect[n_pair_index, wavelength_design_index, 1])
     
     # Plot spectral reflectance for this design
-    show_spectral_reflectance = False
-    print(show_spectral_reflectance)
+    show_spectral_reflectance = True
     if show_spectral_reflectance:
         plt.figure()
         plt.plot(wavelengths*1e9, DBR_TE_reflect[n_pair_index, :, 0],'k',label='R')
@@ -298,30 +335,14 @@ for n_pair in n_pairs:
         plt.ylim(0, 1.05)
         plt.grid()
         plt.xlabel('Wavelegnth (nm)')
-        plt.ylabel('Optical parameters')
+        plt.ylabel('Reflectance')
         plt.title('Bottom DBR mirror')
         plt.legend(loc='upper left')
         plt.show()
     
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
-    this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
-    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
-    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
-    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
+    print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect}")
     # Next N
     n_pair_index += 1
     
-# Reflectance versus number of layers
-DBR_TE_error_reflect_design = [4 * x for x in DBR_TE_std_reflect_design]
-plt.figure()
-plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
-#plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
-plt.axhline(y = target_reflectance_bottom, linestyle = '--', color = 'k', label = 'Bottom DBR target reflectance')
-plt.title('Bottom DBR mirror')
-plt.xlabel('Number of layers pairs')
-plt.ylabel('Reflectance')
-plt.ylim(0, 1.05)
-plt.xlim(0, 42)
-plt.grid()
-plt.show()
