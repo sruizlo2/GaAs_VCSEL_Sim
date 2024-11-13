@@ -35,9 +35,10 @@ mat_file_AlGaAs = 'AlGaAs-X=' + str(Al_concentration)
 mat_file_AlAs = 'AlAs'
 
 # Design parameters
-target_reflectance_top = 0.95;
-target_reflectance_bottom = 0.995;
+target_reflectance_top = 0.95
+target_reflectance_bottom = 0.995
 thickness_error = 0.05
+sigmaFactor = 2
 
 # Load materials parameters, n and K for all wavelength
 index_Mat_GaAs_undoped, loss_Mat_GaAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_GaAs), False)
@@ -45,7 +46,7 @@ index_Mat_AlGaAs_undoped, loss_Mat_AlGaAs_undoped = ReadMatFile(wavelengths, os.
 index_Mat_AlAs_undoped, loss_Mat_AlAs_undoped = ReadMatFile(wavelengths, os.path.join(path_to_mat_files, mat_file_AlAs))
 
 # Doping properties
-charge_density_e = 5e18 * 1e6 # Electrons
+charge_density_e = 2.5e18 * 1e6 # Electrons
 charge_density_h = 5e18 * 1e6 # Holes
 effective_mass_e_GaAs = 0.063 # Electrons
 effective_mass_h_GaAs = 0.57 # Holes
@@ -81,10 +82,10 @@ n_pairs = np.arange(2, 41, 1) #np.array([15])
 index_Mat_in = index_Mat_AlGaAs_undoped
 loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs_n_doped
-loss_Mat_1 = loss_Mat_AlAs_n_doped
-index_Mat_2 = index_Mat_AlGaAs_n_doped
-loss_Mat_2 = loss_Mat_AlGaAs_n_doped
+index_Mat_1 = index_Mat_AlAs_p_doped
+loss_Mat_1 = loss_Mat_AlAs_p_doped
+index_Mat_2 = index_Mat_AlGaAs_p_doped
+loss_Mat_2 = loss_Mat_AlGaAs_p_doped
 # Set indices of refraction for output layer
 index_Mat_out = np.ones(wavelengths.shape[0]) # Air
 loss_Mat_out = np.zeros(wavelengths.shape[0]) # Air
@@ -101,7 +102,7 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 # Normal incidence
 angle_inc = 0
 # Number of runs to emulate non-ideal thicknesses
-num_runs = 100
+num_runs = 1000
 
 # Iterate over design configurations
 # Initialize variables
@@ -189,14 +190,14 @@ for n_pair in n_pairs:
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
     this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
-    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
-    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_min = this_DBR_TE_reflect - sigmaFactor * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_max = this_DBR_TE_reflect + sigmaFactor * this_DBR_TE_std_reflect
     print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
     # Next N
     n_pair_index += 1
 
 # Reflectance versus number of layers
-DBR_TE_error_reflect_design = [4 * x for x in DBR_TE_std_reflect_design]
+DBR_TE_error_reflect_design = [sigmaFactor * x for x in DBR_TE_std_reflect_design]
 plt.figure()
 plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
 #plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
@@ -217,13 +218,13 @@ n_pairs = np.arange(2, 41, 1) + 0.5 # np.array([26.5])
 index_Mat_in = index_Mat_AlGaAs_undoped
 loss_Mat_in = loss_Mat_AlGaAs_undoped
 # Set indices of refraction for alternating layers
-index_Mat_1 = index_Mat_AlAs_p_doped
-loss_Mat_1 = loss_Mat_AlAs_p_doped
-index_Mat_2 = index_Mat_AlGaAs_p_doped
-loss_Mat_2 = loss_Mat_AlGaAs_p_doped
+index_Mat_1 = index_Mat_AlAs_n_doped
+loss_Mat_1 = loss_Mat_AlAs_n_doped
+index_Mat_2 = index_Mat_AlGaAs_n_doped
+loss_Mat_2 = loss_Mat_AlGaAs_n_doped
 # Set indices of refraction for output layer
-index_Mat_out = index_Mat_GaAs_p_doped # Substrate
-loss_Mat_out = index_Mat_GaAs_p_doped # Substrate
+index_Mat_out = index_Mat_GaAs_n_doped # Substrate
+loss_Mat_out = index_Mat_GaAs_n_doped # Substrate
 
 # Set parameters for design wavelength
 index_Mat_1_design = index_Mat_1[wavelength_design_index]
@@ -329,14 +330,14 @@ for n_pair in n_pairs:
     # Print this reflectance
     this_DBR_TE_reflect = DBR_TE_mean_reflect_design[n_pair_index]
     this_DBR_TE_std_reflect = DBR_TE_std_reflect_design[n_pair_index]
-    this_DBR_TE_reflect_min = this_DBR_TE_reflect - 4 * this_DBR_TE_std_reflect
-    this_DBR_TE_reflect_max = this_DBR_TE_reflect + 4 * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_min = this_DBR_TE_reflect - sigmaFactor * this_DBR_TE_std_reflect
+    this_DBR_TE_reflect_max = this_DBR_TE_reflect + sigmaFactor * this_DBR_TE_std_reflect
     print(f"N layers: {n_pair} | Reflectance: {this_DBR_TE_reflect} +- {this_DBR_TE_std_reflect} = [{this_DBR_TE_reflect_min} - {this_DBR_TE_reflect_max}]")
     # Next N
     n_pair_index += 1
     
 # Reflectance versus number of layers
-DBR_TE_error_reflect_design = [4 * x for x in DBR_TE_std_reflect_design]
+DBR_TE_error_reflect_design = [sigmaFactor * x for x in DBR_TE_std_reflect_design]
 plt.figure()
 plt.errorbar(n_pairs, DBR_TE_mean_reflect_design, yerr=DBR_TE_error_reflect_design, fmt='k.', label='R_TE')
 #plt.plot(n_pairs, DBR_TE_mean_reflect_design,'k.',label='R_TE')
