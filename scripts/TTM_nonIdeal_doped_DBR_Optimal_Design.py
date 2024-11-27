@@ -77,7 +77,7 @@ index_Mat_AlAs_n_doped, loss_Mat_AlAs_n_doped = ReadMatFileFCC(wavelengths, os.p
 
 ### TOP MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1) #np.array([15])
+n_pairs = np.array([15]) # np.arange(2, 41, 1) #np.array([15])
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs_undoped
 loss_Mat_in = loss_Mat_AlGaAs_undoped
@@ -213,7 +213,7 @@ plt.show()
 # %%
 ### BOTTOM MIRROR
 # Vector with testing number of layer pairs
-n_pairs = np.arange(2, 41, 1) + 0.5 # np.array([26.5])
+n_pairs = np.array([30]) + 0.5 # np.arange(2, 41, 1) + 0.5
 # Set indices of refraction for input layer
 index_Mat_in = index_Mat_AlGaAs_undoped
 loss_Mat_in = loss_Mat_AlGaAs_undoped
@@ -231,6 +231,8 @@ index_Mat_1_design = index_Mat_1[wavelength_design_index]
 loss_Mat_1_design = loss_Mat_1[wavelength_design_index]
 index_Mat_2_design = index_Mat_2[wavelength_design_index]
 loss_Mat_2_design = loss_Mat_2[wavelength_design_index]
+index_Mat_3_design = index_Mat_out[wavelength_design_index]
+loss_Mat_3_design = loss_Mat_out[wavelength_design_index]
 
 # Average index of refraction
 average_index = (index_Mat_1_design + index_Mat_2_design) / 2
@@ -239,8 +241,12 @@ thickness_ideal = wavelength_design / 4 / average_index # lambda / 4 condition (
 angle_inc = 0
 
 # Total tickness
-total_thickness = thickness_ideal * (15 + 26.5) * 2 + wavelength_design / index_Mat_2_design
+total_thickness = thickness_ideal * (15 + 30.5) * 2 + (241e-9 * wavelength_design / (233e-9 * index_Mat_2_design + 8e-9 * index_Mat_3_design))
 print(f"Total thcikness: {total_thickness}")
+DRB_thickness = thickness_ideal * (15 + 30.5) * 2
+print(f"Total thcikness: {DRB_thickness}")
+cavity_thickness = 241e-9 * wavelength_design / (233e-9 * index_Mat_2_design + 8e-9 * index_Mat_3_design)
+print(f"Total thcikness: {cavity_thickness}")
 
 # Iterate over design configurations
 # Initialize variables
