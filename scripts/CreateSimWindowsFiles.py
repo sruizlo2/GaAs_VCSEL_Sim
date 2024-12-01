@@ -20,9 +20,9 @@ import shutil
 wavelength_design = 850e-9; # meters
 n_pairs_top = 15;
 n_pairs_bottom = 30.5;
-charge_density_e = 3e18 * 1e6 # Electrons
-charge_density_h = 1e19 * 1e6 # Holes
-quantum_well_thickness = 24e-3 # microns
+charge_density_e = 2.5e18 * 1e6 # Electrons
+charge_density_h = 5e18 * 1e6 # Holes
+quantum_well_thickness = 8e-3 # microns
 substrate_thickness = 0.1; # microns
 coarse_points_per_nm = 1
 fine_points_per_nm = 10
@@ -43,7 +43,7 @@ wavelength_design_index = np.argwhere(abs(wavelengths - wavelength_design) < 1e-
 # Path to materials files
 path_to_mat_files = '../materials'
 mat_file_GaAs = 'GaAs'
-Al_concentration = 0.219 # 0.097
+Al_concentration = 0.097 # 0.219
 mat_file_AlGaAs = 'AlGaAs-X=' + str(Al_concentration)
 mat_file_AlAs = 'AlAs'
 
@@ -482,48 +482,49 @@ with open(f"../devices/{device_file_name}", "w") as file:
     file.write("\n")
     # Top DBR
     for i in range(n_pairs_top):
-        WriteLayer(file, ideal_layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "Al", Al_concentration)
-        WriteLayer(file, ideal_layer_thickness_top, index_AlAs_p_doped, absorption_AlGaAs_p_doped, "Al", 1)
+        WriteLayer(file, ideal_layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "p-AlGaAs", Al_concentration)
+        WriteLayer(file, ideal_layer_thickness_top, index_AlAs_p_doped, absorption_AlGaAs_p_doped, "p-AlAs", 1)
     
     file.write("\n")
     # Create cavity grid
     WriteGrid(file, ideal_thickness_cavity, ideal_thickness_cavity * 1e3 * fine_points_per_nm)
     file.write("\n")
     # Top confinement layer
-    WriteLayer(file, ideal_thickness_confinement, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "Al", Al_concentration)
+    WriteLayer(file, ideal_thickness_confinement, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "AlGaAs", Al_concentration)
     file.write("\n")
     # Quantum well (change to qw region)
     WriteRegion(file, quantum_well_thickness, "qw")
-    WriteLayer(file, quantum_well_thickness, index_GaAs_undoped, index_GaAs_undoped, "Al", 0)
+    WriteLayer(file, quantum_well_thickness, index_GaAs_undoped, index_GaAs_undoped, "undoped", 0)
     file.write("\n")
     # Continue with bulk region
     WriteRegion(file, ideal_thickness_bulk_bottom, "bulk")
     # Bottom confinement layer
-    WriteLayer(file, ideal_thickness_confinement, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "Al", Al_concentration)
+    WriteLayer(file, ideal_thickness_confinement, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "AlGaAs", Al_concentration)
     file.write("\n")
     # Create bottom DBR grid
     WriteGrid(file, ideal_thickness_bottom, ideal_thickness_bottom * 1e3 * coarse_points_per_nm)
     file.write("\n")
     # Bottom DBR
     for i in range(int(np.ceil(n_pairs_bottom))):
-        WriteLayer(file, ideal_layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "Al", 1)
+        WriteLayer(file, ideal_layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "n-AlAs", 1)
         if i <= n_pairs - 1:
-            WriteLayer(file, ideal_layer_thickness_bottom, index_AlGaAs_n_doped, absorption_AlGaAs_n_doped, "Al", Al_concentration)
+            WriteLayer(file, ideal_layer_thickness_bottom, index_AlGaAs_n_doped, absorption_AlGaAs_n_doped, "n-AlGaAs", Al_concentration)
     file.write("\n")
     # Create substrate grid
     WriteGrid(file, substrate_thickness, substrate_thickness * 1e3 * coarse_points_per_nm)
     file.write("\n")
     # Subtrate
-    WriteLayer(file, substrate_thickness, index_GaAs_n_doped, absorption_GaAs_n_doped, "Al", 0)
+    WriteLayer(file, substrate_thickness, index_GaAs_n_doped, absorption_GaAs_n_doped, "n-GaAs", 0)
     # Doping
     file.write("\n")
     # Top mirror is p-type
     WriteDoping(file, ideal_thickness_top, 0, charge_density_h * 1e-6)
     # Cavity is undoped
     #WriteDoping(file, ideal_thickness_confinement, 0, 1e17)
-    #WriteDoping(file, quantum_well_thickness, 0, 0)
-    #WriteDoping(file, ideal_thickness_confinement, 0, 0)
-    WriteDoping(file, ideal_thickness_cavity, 0, 0)
+    WriteDoping(file, ideal_thickness_confinement, 0, 0)
+    WriteDoping(file, quantum_well_thickness, 0, 0)
+    WriteDoping(file, ideal_thickness_confinement, 0, 0)
+    #WriteDoping(file, ideal_thickness_cavity, 0, 0)
     # Bottom mirror is n-type
     WriteDoping(file, round(ideal_thickness_bottom + substrate_thickness, digit_prec), charge_density_e * 1e-6, 0)
 
