@@ -1,0 +1,25 @@
+grid length=0.26 points=71550
+
+region bulk length=0.26
+structure material=gaas alloy=al length=0.065 conc=0.097
+structure material=gaas alloy=al length=0.065 conc=1
+structure material=gaas alloy=al length=0.065 conc=0.097
+structure material=gaas alloy=al length=0.065 conc=1
+
+Refractive_Index length=0.0325 value=3.5286
+Refractive_Index length=0.0325 value=3.528
+Refractive_Index length=0.0325 value=2.9937
+Refractive_Index length=0.0325 value=2.993
+Refractive_Index length=0.0325 value=3.528
+Refractive_Index length=0.0325 value=3.5286
+Refractive_Index length=0.0325 value=2.9937
+Refractive_Index length=0.0325 value=2.993
+Absorption length=0.065 value=10
+Absorption length=0.065 value=5
+Absorption length=0.065 value=10
+Absorption length=0.065 value=5
+
+
+
+
+

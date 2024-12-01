@@ -1,0 +1,120 @@
+radius=3.5
+cavity surface area=38.485 length=0.246
+mirror metal position=0 ref=0.95
+mirror metal position=6.352 ref=0.995
+
+region bulk length=2.091
+grid length=1.98 points=1980
+
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+
+grid length=0.246 points=2460
+
+structure material=gaas alloy=Al length=0.111 conc=0.219
+
+region qw length=0.024
+structure material=gaas alloy=Al length=0.024 conc=0
+
+region bulk length=4.237
+structure material=gaas alloy=Al length=0.111 conc=0.219
+
+grid length=4.026 points=4026
+
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+structure material=gaas alloy=Al length=0.066 conc=0.219
+structure material=gaas alloy=Al length=0.066 conc=1
+
+grid length=0.1 points=100
+
+structure material=gaas alloy=Al length=0.1 conc=0
+
+doping length=1.98 Na=1e+19
+doping length=0.246
+doping length=4.126 Nd=3e+18

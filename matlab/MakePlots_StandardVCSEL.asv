@@ -1,0 +1,36 @@
+% close all
+% Pre-defined parameters for plotting
+set(groot,'defaultAxesFontSize', 14)
+set(groot,'defaulttextInterpreter', 'latex')
+set(groot, 'defaultAxesTickLabelInterpreter','latex')
+set(0,'defaultfigurecolor',[1 1 1])
+
+%%
+filename = 'C:\SimWindows\VCSEL\StandardVCSEL_MACRO_Output.dat';
+warning off
+macroData = readtable(filename, 'VariableNamingRule', 'modify');
+warning on
+varsNames = macroData.Properties.VariableNames;
+macroData.ContJTotal_A_cm2_AtLtCont = 1e-3 * macroData.ContJTotal_A_cm2_AtLtCont
+fprintf('Variaables:\n')
+fprintf('\t%s\n', varsNames{:})
+
+%%
+varsToPlotX = {'ContJTotal_A_cm2_AtLtCont',...
+               'ContJTotal_A_cm2_AtLtCont'};
+varsToPlotY = {{'ContPot_V_AtLtCont', 'OptPwr_mW_AtLtMir'},...
+               'OptPwr_mW_AtLtMir'};
+plotTittle = {'', ''};
+xAxesLabel = {'Current density [kA/cm$^2$]',...
+              'Current density [kA/cm$^2$]'};
+yAxesLabel ={{'Voltage [V]', 'Optical power [mW]'},...
+             {'Voltage [V]'}};
+xLims = {[-inf inf],...
+         [-inf inf]};
+yLims = {{[-inf inf], [-inf, 0.5]},...
+         [-inf 0.5]};
+curFig = 0; 
+ProcessSimWinMacro(macroData, varsToPlotX, varsToPlotY,...
+  plotTittle, xAxesLabel, yAxesLabel, xLims, yLims, curFig);
+
+figure(10), plot(macroData.ContPot_V_AtLtCont, macroData.OptPwr_mW_AtLtMir)

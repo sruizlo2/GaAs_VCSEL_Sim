@@ -1,0 +1,8 @@
+grid length=0.26 points=71550
+
+repeat start
+
+structure material=gaas alloy=al length=0.065 conc=0.097
+structure material=gaas alloy=al length=0.065 conc=1
+
+repeat=2
