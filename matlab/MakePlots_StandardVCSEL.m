@@ -6,7 +6,7 @@ set(groot, 'defaultAxesTickLabelInterpreter','latex')
 set(0,'defaultfigurecolor',[1 1 1])
 
 %%
-filename = 'C:\SimWindows\VCSEL\StandardVCSEL_MACRO_Output.dat';
+filename = 'C:\SimWindows\VCSEL\VCSEL_MACRO_Output.dat';
 warning off
 macroData = readtable(filename, 'VariableNamingRule', 'modify');
 warning on
@@ -19,38 +19,40 @@ fprintf('\t%s\n', varsNames{:})
 
 %%
 varsToPlotX = {'ContJTotal_A_cm2_AtLtCont',...
-               'ContPot_V_AtLtCont'};
+               'ContJTotal_A_cm2_AtLtCont'};
 varsToPlotY = {{'ContPot_V_AtLtCont', 'OptPwr_mW_AtLtMir'},...
-               'OptPwr_mW_AtLtMir'};
+               {'OptPwr_mW_AtLtMir'}};
 plotTittle = {'', ''};
 xAxesLabel = {'Current density [A/cm$^2$]',...
-              'Voltage [V]'};
+              'Current density [A/cm$^2$]'};
 yAxesLabel ={{'Voltage [V]', 'Optical power [mW]'},...
              {'Optical power [mW]'}};
 xLims = {[-inf inf],...
          [-inf inf]};
-yLims = {{[-inf inf], [-inf, 0.5]},...
-         [-inf 0.5]};
+yLims = {{[-inf inf], [-inf, inf]},...
+         [-inf inf]};
+logScale = [false true];
 curFig = 0; 
 ProcessSimWinMacro(macroData, varsToPlotX, varsToPlotY,...
-  plotTittle, xAxesLabel, yAxesLabel, xLims, yLims, curFig);
+  plotTittle, xAxesLabel, yAxesLabel, xLims, yLims, logScale, curFig);
 
 
 
 varsToPlotX = {'ContITotal_mA_AtLtCont',...
-               'ContPot_V_AtLtCont'};
+               'ContITotal_mA_AtLtCont'};
 varsToPlotY = {{'ContPot_V_AtLtCont', 'OptPwr_mW_AtLtMir'},...
-               'OptPwr_mW_AtLtMir'};
+               {'OptPwr_mW_AtLtMir'}};
 plotTittle = {'', ''};
 xAxesLabel = {'Current [mA]',...
-              'Voltage [V]'};
+              'Current [mA]'};
 yAxesLabel ={{'Voltage [V]', 'Optical power [mW]'},...
              {'Optical power [mW]'}};
 xLims = {[-inf inf],...
          [-inf inf]};
-yLims = {{[-inf inf], [-inf, 0.5]},...
-         [-inf 0.5]};
+yLims = {{[-inf inf], [-inf, inf]},...
+         [-inf inf]};
+logScale = [false true];
 curFig = 10; 
 ProcessSimWinMacro(macroData, varsToPlotX, varsToPlotY,...
-  plotTittle, xAxesLabel, yAxesLabel, xLims, yLims, curFig);
+  plotTittle, xAxesLabel, yAxesLabel, xLims, yLims, logScale, curFig);
 
