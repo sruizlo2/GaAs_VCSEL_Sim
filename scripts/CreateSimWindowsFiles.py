@@ -22,10 +22,11 @@ n_pairs_top = 15;
 n_pairs_bottom = 30.5;
 charge_density_e = 2.5e18 * 1e6 # Electrons
 charge_density_h = 5e18 * 1e6 # Holes
-DeltaDoping = True
+DeltaDoping = False
 charge_density_delta_e = 2.5e19 * 1e6 # Electrons
 charge_density_delta_h = 5e19 * 1e6 # Holes
-delta_doping_thickness_factor = 1 / 20
+delta_doping_thickness_factor = 1 / 10
+transition_layer_thickness_factor = 1 / 5
 quantum_well_thickness = 8e-3 # microns
 n_quantum_wells = 1
 substrate_thickness = 0.1; # microns
@@ -372,12 +373,18 @@ average_index_bottom = (index_Mat_AlAs_n_doped[wavelength_design_index] + index_
 confinement_index =  index_Mat_AlGaAs_undoped[wavelength_design_index]
 quantum_well_index =  index_Mat_GaAs_undoped[wavelength_design_index]
 # Ideal thicknesses
-digit_prec = 8
+digit_prec = 4
 ideal_layer_thickness_top = round(wavelength_design / 4 / average_index_top * 1e6, digit_prec) # lambda / 4 condition (per layer)
+trans_layer_thickness_top = round(ideal_layer_thickness_top * transition_layer_thickness_factor, digit_prec)
+layer_thickness_top = round(ideal_layer_thickness_top - trans_layer_thickness_top, digit_prec)
 ideal_thickness_top = round(ideal_layer_thickness_top * n_pairs_top * 2, digit_prec)
 ideal_layer_thickness_bottom = round(wavelength_design / 4 / average_index_bottom * 1e6, digit_prec) # lambda / 4 condition (per layer)
+trans_layer_thickness_bottom = round(ideal_layer_thickness_bottom * transition_layer_thickness_factor, digit_prec)
+layer_thickness_bottom = round(ideal_layer_thickness_bottom - trans_layer_thickness_bottom, digit_prec)
 ideal_thickness_bottom = round(ideal_layer_thickness_bottom * n_pairs_bottom * 2, digit_prec)
 ideal_thickness_confinement = round((wavelength_design - (quantum_well_index * quantum_well_thickness * n_quantum_layers) * 1e-6) / 2 / confinement_index * 1e6, digit_prec)
+thickness_confinement_top = round(ideal_thickness_confinement - trans_layer_thickness_top, digit_prec)
+thickness_confinement_bottom = round(ideal_thickness_confinement - trans_layer_thickness_bottom, digit_prec)
 ideal_thickness_bulk_top = round(ideal_thickness_top + ideal_thickness_confinement, digit_prec)
 ideal_thickness_bulk_bottom = round(ideal_thickness_bottom + ideal_thickness_confinement + substrate_thickness, digit_prec)
 ideal_thickness_cavity = round(2 * ideal_thickness_confinement + quantum_well_thickness * n_quantum_layers, digit_prec)
@@ -389,7 +396,7 @@ total_thickness = round(ideal_thickness_top + ideal_thickness_cavity + ideal_thi
 cavity_area = round(np.pi * cavity_radius ** 2, digit_prec)
 
 # Refractive indices
-digit_prec = 8
+digit_prec = 4
 # GaAs
 index_GaAs_undoped = round(index_Mat_GaAs_undoped[wavelength_design_index], digit_prec)
 index_GaAs_n_doped = round(index_Mat_GaAs_n_doped[wavelength_design_index], digit_prec)
@@ -454,12 +461,17 @@ def WriteRegion(file, length, region_type):
     file.write(f"region {region_type} length={length}\n")
     return
 
-def WriteLayer(file, thickness, refractive_index, absorption, alloy, concentration):
+def WriteLayer(file, thickness, refractive_index, absorption, alloy, concentration, slope=0):
     #if refractive_index > 0:
     #    file.write(f"Refractive_Index length={thickness} value={refractive_index}\n")
     #if absorption > 0:
     #    file.write(f"Absorption length={thickness} value={0}\n")
-    file.write(f"structure material=gaas alloy={alloy} length={thickness} conc={concentration}\n")
+    if slope > 0:
+        file.write(f"structure material=gaas alloy={alloy} length={thickness} conc={concentration}+{abs(slope)}*d\n")
+    elif slope < 0:
+        file.write(f"structure material=gaas alloy={alloy} length={thickness} conc={concentration}-{abs(slope)}*d\n")
+    else:
+        file.write(f"structure material=gaas alloy={alloy} length={thickness} conc={concentration}\n")
     return
 
 def WriteDoping(file, thickness, donors_conc, acceptors_conc):
@@ -486,29 +498,41 @@ with open(f"../devices/{device_file_name}", "w") as file:
     # Start with bulk region
     WriteRegion(file, ideal_thickness_bulk_top, "bulk")
     # Create top DBR grid
-    WriteGrid(file, ideal_thickness_top, ideal_thickness_top * 1e3 * coarse_points_per_nm)
-    file.write("\n")
+    #WriteGrid(file, ideal_thickness_top, ideal_thickness_top * 1e3 * coarse_points_per_nm)
     # Top DBR
     for i in range(n_pairs_top):
-        WriteLayer(file, ideal_layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "p-AlGaAs", Al_concentration)
-        WriteLayer(file, ideal_layer_thickness_top, index_AlAs_p_doped, absorption_AlGaAs_p_doped, "p-AlAs", 1)
+        # First layer
+        WriteGrid(file, layer_thickness_top, layer_thickness_top * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "p-AlGaAs", Al_concentration)
+        # Transition layer
+        WriteGrid(file, trans_layer_thickness_top, trans_layer_thickness_top * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, trans_layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "p-AlGaAs", Al_concentration,
+                   round((1 - Al_concentration) / trans_layer_thickness_top, digit_prec))
+        # Second layer
+        WriteGrid(file, layer_thickness_top, layer_thickness_top * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, layer_thickness_top, index_AlAs_p_doped, absorption_AlGaAs_p_doped, "p-AlAs", 1)
+        # Transition layer
+        WriteGrid(file, trans_layer_thickness_top, trans_layer_thickness_top * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, trans_layer_thickness_top, index_AlGaAs_p_doped, absorption_AlGaAs_p_doped, "p-AlGaAs", 1,
+                   round(-(1 - Al_concentration) / trans_layer_thickness_top, digit_prec))
         if DeltaDoping:
-            WriteDoping(file, round(ideal_layer_thickness_top * delta_doping_thickness_factor, digit_prec), 0, charge_density_delta_h * 1e-6)
-            WriteDoping(file, round(ideal_layer_thickness_top * (1 - 2 * delta_doping_thickness_factor), digit_prec), 0, charge_density_h * 1e-6)
-            WriteDoping(file, round(2 * ideal_layer_thickness_top * delta_doping_thickness_factor, digit_prec), 0, charge_density_delta_h * 1e-6)
-            WriteDoping(file, round(ideal_layer_thickness_top * (1 - 2 * delta_doping_thickness_factor), digit_prec), 0, charge_density_h * 1e-6)
-            WriteDoping(file, round(ideal_layer_thickness_top * delta_doping_thickness_factor, digit_prec), 0, charge_density_delta_h * 1e-6)
+            WriteDoping(file, round(ideal_layer_thickness_top * (1 - delta_doping_thickness_factor), digit_prec), 0, charge_density_h * 1e-6)
+            WriteDoping(file, round(1 * ideal_layer_thickness_top * delta_doping_thickness_factor, digit_prec), 0, charge_density_delta_h * 1e-6)
+            WriteDoping(file, round(ideal_layer_thickness_top, digit_prec), 0, charge_density_h * 1e-6)
     
     file.write("\n")
     # Top mirror is p-type
     if not DeltaDoping:
         WriteDoping(file, ideal_thickness_top, 0, charge_density_h * 1e-6)
     file.write("\n")
-    # Create cavity grid
+    # Create cavity
     WriteGrid(file, ideal_thickness_cavity, ideal_thickness_cavity * 1e3 * fine_points_per_nm)
-    file.write("\n")
     # Top confinement layer
     WriteLayer(file, ideal_thickness_confinement, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "AlGaAs", Al_concentration)
+    # Transition layer
+    #WriteGrid(file, trans_layer_thickness_top, trans_layer_thickness_top * 1e3 * fine_points_per_nm)
+    #WriteLayer(file, trans_layer_thickness_top, index_AlGaAs_undoped, absorption_AlGaAs_undoped, "AlGaAs", Al_concentration,
+    #               round(-(1 - Al_concentration) / trans_layer_thickness_top, digit_prec))
     file.write("\n")
     # Quantum well (change to qw region)
     for i in range(n_quantum_layers):
@@ -531,17 +555,29 @@ with open(f"../devices/{device_file_name}", "w") as file:
     WriteDoping(file, ideal_thickness_confinement, 0, 0)
     #WriteDoping(file, ideal_thickness_cavity, 0, 0)
     # Create bottom DBR grid
-    WriteGrid(file, ideal_thickness_bottom, ideal_thickness_bottom * 1e3 * coarse_points_per_nm)
-    file.write("\n")
+    #WriteGrid(file, ideal_thickness_bottom, ideal_thickness_bottom * 1e3 * coarse_points_per_nm)
+    #file.write("\n")
     # Bottom DBR
     for i in range(int(np.ceil(n_pairs_bottom))):
-        WriteLayer(file, ideal_layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "n-AlAs", 1)
+        # First layer
+        WriteGrid(file, layer_thickness_bottom, layer_thickness_bottom * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "n-AlAs", 1)
+        # Transition layer
+        WriteGrid(file, trans_layer_thickness_bottom, trans_layer_thickness_bottom * 1e3 * coarse_points_per_nm)
+        WriteLayer(file, trans_layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "n-AlAs", 1,
+                   round(-(1 - Al_concentration) / trans_layer_thickness_bottom, digit_prec))
         if DeltaDoping:
             WriteDoping(file, round(ideal_layer_thickness_bottom * delta_doping_thickness_factor, digit_prec), charge_density_delta_e * 1e-6, 0)
             WriteDoping(file, round(ideal_layer_thickness_bottom * (1 - 2 *delta_doping_thickness_factor), digit_prec), charge_density_e * 1e-6, 0)
             WriteDoping(file, round(ideal_layer_thickness_bottom * delta_doping_thickness_factor, digit_prec), charge_density_delta_e * 1e-6, 0)
         if i <= n_pairs - 1:
-            WriteLayer(file, ideal_layer_thickness_bottom, index_AlGaAs_n_doped, absorption_AlGaAs_n_doped, "n-AlGaAs", Al_concentration)
+            # Second layer
+            WriteGrid(file, layer_thickness_bottom, layer_thickness_bottom * 1e3 * coarse_points_per_nm)
+            WriteLayer(file, layer_thickness_bottom, index_AlGaAs_n_doped, absorption_AlGaAs_n_doped, "n-AlGaAs", Al_concentration)
+            # Transition layer
+            WriteGrid(file, trans_layer_thickness_bottom, trans_layer_thickness_bottom * 1e3 * coarse_points_per_nm)
+            WriteLayer(file, trans_layer_thickness_bottom, index_AlAs_n_doped, absorption_AlAs_n_doped, "n-AlAs", Al_concentration,
+                       round((1 - Al_concentration) / trans_layer_thickness_bottom, digit_prec))
             if DeltaDoping:
                 WriteDoping(file, round(ideal_layer_thickness_bottom * delta_doping_thickness_factor, digit_prec), charge_density_delta_e * 1e-6, 0)
                 WriteDoping(file, round(ideal_layer_thickness_bottom * (1 - 2 * delta_doping_thickness_factor), digit_prec), charge_density_e * 1e-6, 0)
@@ -571,15 +607,15 @@ destination_file = os.path.abspath(destination_file)
 shutil.copy(source_file, destination_file)
 
 # Add text to specific lines
-lines_to_edit = {187: f"\nREFRACTIVE_INDEX value={index_GaAs_undoped}\nABSORPTION value={0*absorption_GaAs_undoped}\n",
-                 223: f"\nREFRACTIVE_INDEX value={index_AlAs_undoped}\nABSORPTION value={0*absorption_AlAs_undoped}\n",
-                 277: f"\nREFRACTIVE_INDEX value={index_AlGaAs_undoped}\nABSORPTION value={0*absorption_AlGaAs_undoped}\n",
-                 325: f"\nREFRACTIVE_INDEX value={index_GaAs_p_doped}\nABSORPTION value={0*absorption_GaAs_p_doped}\n",
-                 361: f"\nREFRACTIVE_INDEX value={index_AlAs_p_doped}\nABSORPTION value={0*absorption_AlAs_p_doped}\n",
-                 415: f"\nREFRACTIVE_INDEX value={index_AlGaAs_p_doped}\nABSORPTION value={0*absorption_AlGaAs_p_doped}\n",
-                 463: f"\nREFRACTIVE_INDEX value={index_GaAs_n_doped}\nABSORPTION value={0*absorption_GaAs_n_doped}\n",
-                 499: f"\nREFRACTIVE_INDEX value={index_AlAs_n_doped}\nABSORPTION value={0*absorption_AlAs_n_doped}\n",
-                 553: f"\nREFRACTIVE_INDEX value={index_AlGaAs_n_doped}\nABSORPTION value={0*absorption_AlGaAs_n_doped}\n"}
+lines_to_edit = {187: f"\nREFRACTIVE_INDEX value={index_GaAs_undoped}\nABSORPTION value={absorption_GaAs_undoped}\n",
+                 223: f"\nREFRACTIVE_INDEX value={index_AlAs_undoped}\nABSORPTION value={absorption_AlAs_undoped}\n",
+                 277: f"\nREFRACTIVE_INDEX value={index_AlGaAs_undoped}\nABSORPTION value={absorption_AlGaAs_undoped}\n",
+                 325: f"\nREFRACTIVE_INDEX value={index_GaAs_p_doped}\nABSORPTION value={absorption_GaAs_p_doped}\n",
+                 361: f"\nREFRACTIVE_INDEX value={index_AlAs_p_doped}\nABSORPTION value={absorption_AlAs_p_doped}\n",
+                 415: f"\nREFRACTIVE_INDEX value={index_AlGaAs_p_doped}\nABSORPTION value={absorption_AlGaAs_p_doped}\n",
+                 463: f"\nREFRACTIVE_INDEX value={index_GaAs_n_doped}\nABSORPTION value={absorption_GaAs_n_doped}\n",
+                 499: f"\nREFRACTIVE_INDEX value={index_AlAs_n_doped}\nABSORPTION value={absorption_AlAs_n_doped}\n",
+                 553: f"\nREFRACTIVE_INDEX value={index_AlGaAs_n_doped}\nABSORPTION value={absorption_AlGaAs_n_doped}\n"}
 # Read and modify lines
 with open(destination_file, 'r', encoding='latin1') as file:
     lines = file.readlines()
