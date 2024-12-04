@@ -11,10 +11,10 @@ for thisVarX = 1:length(varsToPlotX)
     end
     if logScale(thisVarX)
       loglog(macroData.(varsToPlotX{thisVarX}), macroData.(varsToPlotY{thisVarX}{thisVarY}),...
-        'linewidth', 1.5)
+        '-', 'linewidth', 1.5, 'MarkerSize', 5)
     else
       plot(macroData.(varsToPlotX{thisVarX}), macroData.(varsToPlotY{thisVarX}{thisVarY}),...
-        'linewidth', 1.5)
+        '-', 'linewidth', 1.5, 'MarkerSize', 5)
     end
     if length(varsToPlotY{thisVarX}) > 1
       ylabel(yAxesLabel{thisVarX}{thisVarY}), ylim(yLims{thisVarX}{thisVarY})

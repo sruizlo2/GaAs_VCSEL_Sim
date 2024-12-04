@@ -179,16 +179,16 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.7"
-     inkscape:cx="327.69278"
-     inkscape:cy="470.94629"
+     inkscape:zoom="1"
+     inkscape:cx="643.53678"
+     inkscape:cy="144.66414"
      inkscape:document-units="mm"
      inkscape:current-layer="layer1"
      showgrid="false"
      inkscape:window-width="1920"
-     inkscape:window-height="1001"
-     inkscape:window-x="-9"
-     inkscape:window-y="-9"
+     inkscape:window-height="1017"
+     inkscape:window-x="1912"
+     inkscape:window-y="-8"
      inkscape:window-maximized="1"
      showguides="true"
      fit-margin-top="0"
@@ -277,19 +277,6 @@
        height="4.5708055"
        x="48.240856"
        y="18.514612" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556011px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458299"
-       x="38.656212"
-       y="35.134171"
-       id="text849-4"><tspan
-         sodipodi:role="line"
-         id="tspan847-3"
-         x="38.656212"
-         y="35.134171"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458299">t<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan3112">a</tspan></tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-start:url(#TriangleInS);marker-end:url(#TriangleOutS)"
        d="m 45.59502,43.315032 8e-6,-19.059233"
@@ -337,32 +324,6 @@
        id="path1066-6-5"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556011px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458299"
-       x="38.922691"
-       y="3.9264138"
-       id="text849-4-4"><tspan
-         sodipodi:role="line"
-         id="tspan847-3-5"
-         x="38.922691"
-         y="3.9264138"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458299">t<tspan
-   style="font-size:64.99999762%;baseline-shift:sub"
-   id="tspan3114">t</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556011px;line-height:1.25;font-family:Helvetica;-inkscape-font-specification:Helvetica;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458299"
-       x="38.981209"
-       y="66.341927"
-       id="text849-4-9"><tspan
-         sodipodi:role="line"
-         id="tspan847-3-2"
-         x="38.981209"
-         y="66.341927"
-         style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-family:'cambria math';-inkscape-font-specification:'cambria math';stroke-width:0.26458299">t<tspan
-   style="font-size:4.58611012px;baseline-shift:sub;stroke-width:0.26458299"
-   id="tspan3112-5">b</tspan></tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556011px;line-height:1.25;font-family:'CMU Concrete';-inkscape-font-specification:'CMU Concrete';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458299"
@@ -635,5 +596,16 @@
        height="8.4958334"
        x="48.240837"
        y="34.37291" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05555534px;line-height:1.25;font-family:'Latin modern';-inkscape-font-specification:'Latin modern';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.26458332"
+       x="38.409504"
+       y="36.465698"
+       id="text1035"><tspan
+         sodipodi:role="line"
+         id="tspan1033"
+         x="38.409504"
+         y="36.465698"
+         style="stroke-width:0.26458332">λ</tspan></text>
   </g>
 </svg>

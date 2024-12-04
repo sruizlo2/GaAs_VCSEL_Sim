@@ -1,0 +1,77 @@
+radius=3.5
+cavity surface area=38.4845 length=1.0364
+mirror metal position=0 ref=0.992
+mirror metal position=7.6432 ref=0.996
+
+repeat start
+region bulk length=0.1304
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=0.097
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=0.097+69.4615*d
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=1
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=1-69.4615*d
+doping length=0.1304 Na=2.5e+19 Na_deg=4 Na_level=0.026
+repeat=3
+repeat start
+region bulk length=0.1304
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=0.097
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=0.097+69.4615*d
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=1
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=1-69.4615*d
+doping length=0.1304 Na=5e+18 Na_deg=4 Na_level=0.026
+repeat=19
+region bulk length=0.1304
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=0.097
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=0.097+69.4615*d
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=1
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=1-69.4615*d
+doping length=0.1044 Na=5e+18 Na_deg=4 Na_level=0.026
+doping length=0.026 Na=2.5e+18 Na_deg=4 Na_level=0.026
+
+grid length=0.2408 points=2408
+region bulk length=0.1164
+structure material=gaas alloy=Al length=0.1164 conc=0.097
+
+structure material=gaas alloy=default length=0.008 conc=0
+region qw length=0.008
+
+region bulk length=0.1164
+structure material=gaas alloy=Al length=0.1164 conc=0.097
+
+doping length=0.1164 Na=1e+17 Na_deg=4 Na_level=0.026
+doping length=0.008
+doping length=0.1164
+repeat start
+region bulk length=0.1304
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=1
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=1-69.4615*d
+grid length=0.0522 points=52
+structure material=gaas alloy=Al length=0.0522 conc=0.097
+grid length=0.013 points=13
+structure material=gaas alloy=Al length=0.013 conc=0.097+69.4615*d
+doping length=0.1304 Nd=2.5e+18 Nd_deg=2 Nd_level=0.005
+repeat=35
+region bulk length=0.0652
+grid length=0.0652 points=65
+structure material=gaas alloy=Al length=0.0652 conc=1
+doping length=0.0652 Nd=2.5e+18 Nd_deg=2 Nd_level=0.005
+
+region bulk length=0.1
+grid length=0.1 points=100
+
+structure material=gaas alloy=Al length=0.1 conc=0
+
+doping length=0.1 Nd=2.5e+18 Nd_deg=2 Nd_level=0.005

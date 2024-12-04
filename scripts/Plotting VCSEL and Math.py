@@ -2,8 +2,13 @@ import pandas as pd
 import os
 from matplotlib import pyplot as plt
 
-path = 'C:\\Users\\petee\\Documents\\GitHub\\GaAs_VCSEL_Sim\\VCSEL Data\\3QW GaAs 3V sweep(high reflection).dat'
-data = pd.read_csv(path, skiprows=1, header=None)
+user = 'Srulo'
+if user == 'Pete':
+    path = 'C:\\Users\\petee\\Documents\\GitHub\\GaAs_VCSEL_Sim\\VCSEL Data\\'
+else:
+    path = 'I:\\Documentos\GaAs_VCSEL_Sim\\'
+    
+data = pd.read_csv(path + '3QW GaAs 3V sweep(high reflection).dat', skiprows=1, header=None)
 
 voltage = data[0]
 current = data[4]
@@ -45,8 +50,7 @@ print(fc-fv)
 import pandas as pd
 import os
 from matplotlib import pyplot as plt
-path = 'C:\\Users\\petee\\Documents\\GitHub\\GaAs_VCSEL_Sim\\VCSEL Data\\Band Diagram 0 Bias.dat'
-data = pd.read_csv(path, skiprows=1, header=None)
+data = pd.read_csv(path + 'Band Diagram 0 Bias.dat', skiprows=1, header=None)
 
 plt.rcParams['figure.figsize'] = 6, 3
 Position = data[0]
@@ -70,8 +74,7 @@ plt.xlim(1.7,2.4)
 import pandas as pd
 import os
 from matplotlib import pyplot as plt
-path = 'C:\\Users\\petee\\Documents\\GitHub\\GaAs_VCSEL_Sim\\VCSEL Data\\Band Diagram T Bias.dat'
-data = pd.read_csv(path, skiprows=1, header=None)
+data = pd.read_csv(path + 'Band Diagram T Bias.dat', skiprows=1, header=None)
 
 plt.rcParams['figure.figsize'] = 6, 3
 Position = data[0]
@@ -126,8 +129,7 @@ print(power)
 import pandas as pd
 import os
 from matplotlib import pyplot as plt
-path = 'C:\\Users\\petee\\Documents\\GitHub\\GaAs_VCSEL_Sim\\VCSEL Data\\New Device Band Diagram T Bias.dat'
-data = pd.read_csv(path, skiprows=1, header=None)
+data = pd.read_csv(path + 'New Device Band Diagram T Bias.dat', skiprows=1, header=None)
 
 plt.rcParams['figure.figsize'] = 6, 3
 Position = data[0]
@@ -146,3 +148,53 @@ plt.xlim(1.7,2.4)
 # plt.ylim(0.0000001,10)
 
 print(Ec)
+
+#%%
+data = pd.read_csv(path + 'VCSEL_Mod1_Recombination.dat', skiprows=1, header=None)
+
+plt.rcParams['figure.figsize'] = 6, 3
+Position = data[0]
+total = data[1]
+stim = data[2]
+plt.plot(Position,total,color='red')
+plt.plot(Position,stim,color='blue')
+plt.xlabel('Position', fontsize=14)
+plt.ylabel('Recombination (1/cm^3s)', fontsize=14)
+plt.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
+plt.xlim(3.2,3.5)
+#%%
+data = pd.read_csv(path + 'VCSEL_Opt_Recombination.dat', skiprows=1, header=None)
+
+plt.rcParams['figure.figsize'] = 6, 3
+Position = data[0]
+total = data[1]
+stim = data[2]
+plt.plot(Position,total,color='red')
+plt.plot(Position,stim,color='blue')
+plt.xlabel('Position', fontsize=14)
+plt.ylabel('Recombination (1/cm^3s)', fontsize=14)
+#plt.tick_params(axis='x', which='both', bottom=False, labelbottom=False)
+plt.xlim(3.1,3.3)
+
+#%%
+data = pd.read_csv(path + 'VCSEL_Mod1_MACRO_Output.dat', skiprows=1, header=None)
+
+plt.rcParams['figure.figsize'] = 4, 4
+Voltage = data[0]
+Power = data[1]
+Current = data[3]
+plt.loglog(Current,Power,color='red')
+plt.xlabel('Current density [A/cm^2]', fontsize=14)
+plt.ylabel('Optical power (mW)', fontsize=14)
+plt.grid()
+#%%
+data = pd.read_csv(path + 'VCSEL_Opt_MACRO_Output.dat', skiprows=1, header=None)
+
+plt.rcParams['figure.figsize'] = 4, 4
+Voltage = data[0]
+Power = data[1]
+Current = data[3]
+plt.loglog(Current,Power,color='blue')
+plt.xlabel('Current density [A/cm^2]', fontsize=14)
+plt.ylabel('Optical power (mW)', fontsize=14)
+plt.grid()

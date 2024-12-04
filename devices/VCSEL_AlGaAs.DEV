@@ -1,0 +1,361 @@
+radius=3.5
+cavity surface area=38.4845 length=1.1904
+mirror metal position=0 ref=0.95
+mirror metal position=6.3529 ref=0.995
+
+region bulk length=2.0964
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+grid length=0.0528 points=53
+structure material=gaas alloy=p-AlGaAs length=0.0528 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=p-AlGaAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.066 points=66
+structure material=gaas alloy=p-AlAs length=0.066 conc=1
+
+doping length=1.98 Na=5e+18 Na_deg=4 Na_level=0.026
+
+grid length=0.2408 points=2408
+structure material=gaas alloy=conf-AlGaAs length=0.1164 conc=0.097
+
+structure material=gaas alloy=qw-AlGaAs length=0.008 conc=0.097
+region qw length=0.008
+
+region bulk length=4.2485
+structure material=gaas alloy=conf-AlGaAs length=0.1164 conc=0.097
+
+doping length=0.1164
+doping length=0.008
+doping length=0.1164
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlGaAs length=0.0529 conc=0.219
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=0.219+59.1667*d
+grid length=0.0529 points=53
+structure material=gaas alloy=n-AlAs length=0.0529 conc=1
+grid length=0.0132 points=13
+structure material=gaas alloy=n-AlAs length=0.0132 conc=1-59.1667*d
+
+grid length=0.1 points=100
+
+structure material=gaas alloy=n-GaAs length=0.1 conc=0
+
+doping length=4.1321 Nd=2.5e+18 Nd_deg=2 Nd_level=0.005

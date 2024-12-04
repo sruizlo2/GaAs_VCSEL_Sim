@@ -185,9 +185,6 @@ BAND_GAP Model=Band_gap terms=1.424,0,0,-5.405e-4,204
 ELECTRON_AFFINITY Model=Band_gap terms=4.07,0,0,2.702e-4,204
 STATIC_PERMITIVITY Value=13.18
 
-REFRACTIVE_INDEX value=3.58615
-ABSORPTION value=6774.33387
-
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,0,0,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,0,0,-2.25
 ELECTRON_MOBILITY Value=8000
@@ -223,9 +220,6 @@ Start_x=0.0 end_x=0.45 Model=Band_gap terms=4.07,-0.7482,0,2.702e-4,204
 Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
-
-REFRACTIVE_INDEX value=2.99807
-ABSORPTION value=16.79188
 
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
@@ -281,9 +275,6 @@ Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
 
-REFRACTIVE_INDEX value=3.53807
-ABSORPTION value=9.03624
-
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
 
@@ -332,9 +323,6 @@ BAND_GAP Model=Band_gap terms=1.424,0,0,-5.405e-4,204
 ELECTRON_AFFINITY Model=Band_gap terms=4.07,0,0,2.702e-4,204
 STATIC_PERMITIVITY Value=13.18
 
-REFRACTIVE_INDEX value=3.58537
-ABSORPTION value=6776.6793
-
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,0,0,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,0,0,-2.25
 ELECTRON_MOBILITY Value=8000
@@ -370,9 +358,6 @@ Start_x=0.0 end_x=0.45 Model=Band_gap terms=4.07,-0.7482,0,2.702e-4,204
 Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
-
-REFRACTIVE_INDEX value=2.99737
-ABSORPTION value=17.86606
 
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
@@ -428,9 +413,6 @@ Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
 
-REFRACTIVE_INDEX value=3.53731
-ABSORPTION value=9.93068
-
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
 
@@ -479,9 +461,6 @@ BAND_GAP Model=Band_gap terms=1.424,0,0,-5.405e-4,204
 ELECTRON_AFFINITY Model=Band_gap terms=4.07,0,0,2.702e-4,204
 STATIC_PERMITIVITY Value=13.18
 
-REFRACTIVE_INDEX value=3.57914
-ABSORPTION value=6792.42097
-
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,0,0,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,0,0,-2.25
 ELECTRON_MOBILITY Value=8000
@@ -517,9 +496,6 @@ Start_x=0.0 end_x=0.45 Model=Band_gap terms=4.07,-0.7482,0,2.702e-4,204
 Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
-
-REFRACTIVE_INDEX value=2.99455
-ABSORPTION value=32.0972
 
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
@@ -575,8 +551,113 @@ Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
 
 STATIC_PERMITIVITY Value=13.18,-3.12
 
-REFRACTIVE_INDEX value=3.53181
-ABSORPTION value=12.91791
+THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
+DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
+
+ELECTRON_MOBILITY Segments=2
+Start_x=0.0 end_x=0.45 Value=8000,-22000,10000
+Start_x=0.45 end_x=1.0 Value=-255,1160,-720
+
+HOLE_MOBILITY Value=370,-970,740
+
+ELECTRON_DOS_MASS Segments=2
+Start_x=0.0 end_x=0.45 Value=0.067,0.083
+Start_x=0.45 end_x=1.0 Value=0.85,-0.14
+
+HOLE_DOS_MASS Value=0.62,0.14
+
+ELECTRON_COND_MASS Segments=2
+Start_x=0.0 end_x=0.45 Value=0.067,0.083
+Start_x=0.45 end_x=1.0 Value=0.32,-0.06
+
+HOLE_COND_MASS Value=0.62,0.14
+
+ELECTRON_SHR_LIFETIME Value=1e-8
+
+HOLE_SHR_LIFETIME Value=1e-8
+
+ELECTRON_AUGER_COEFFICIENT Value=1.5e-31
+QW_ELECTRON_AUGER_COEFFICIENT Value=1.5e-19
+
+HOLE_AUGER_COEFFICIENT Value=1.5e-31
+QW_HOLE_AUGER_COEFFICIENT Value=1.5e-19
+
+RAD_RECOMB_CONST Value=1.5e-10
+
+ELECTRON_ENERGY_LIFETIME Value=1.e-12
+HOLE_ENERGY_LIFETIME Value=1.e-12
+
+QW_RAD_RECOMB_CONST Value=1.54e-4
+
+ELECTRON_COLLISION_FACTOR Value=0.5
+HOLE_COLLISION_FACTOR Value=0.5
+
+# THIS IS FOR n-type AlGaAs (x for confinement layer)
+Alloy=conf-AlGaAs
+
+BAND_GAP Segments=2
+Start_x=0.00 end_x=0.45 Model=Band_gap terms=1.424,1.247,0,-5.405e-4,204
+Start_x=0.45 end_x=1.00 Model=Band_gap terms=1.9,0.125,0.143,-5.405e-4,204
+
+ELECTRON_AFFINITY Segments=2
+Start_x=0.0 end_x=0.45 Model=Band_gap terms=4.07,-0.7482,0,2.702e-4,204
+Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
+
+STATIC_PERMITIVITY Value=13.18,-3.12
+
+THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
+DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
+
+ELECTRON_MOBILITY Segments=2
+Start_x=0.0 end_x=0.45 Value=8000,-22000,10000
+Start_x=0.45 end_x=1.0 Value=-255,1160,-720
+
+HOLE_MOBILITY Value=370,-970,740
+
+ELECTRON_DOS_MASS Segments=2
+Start_x=0.0 end_x=0.45 Value=0.067,0.083
+Start_x=0.45 end_x=1.0 Value=0.85,-0.14
+
+HOLE_DOS_MASS Value=0.62,0.14
+
+ELECTRON_COND_MASS Segments=2
+Start_x=0.0 end_x=0.45 Value=0.067,0.083
+Start_x=0.45 end_x=1.0 Value=0.32,-0.06
+
+HOLE_COND_MASS Value=0.62,0.14
+
+ELECTRON_SHR_LIFETIME Value=1e-8
+
+HOLE_SHR_LIFETIME Value=1e-8
+
+ELECTRON_AUGER_COEFFICIENT Value=1.5e-31
+QW_ELECTRON_AUGER_COEFFICIENT Value=1.5e-19
+
+HOLE_AUGER_COEFFICIENT Value=1.5e-31
+QW_HOLE_AUGER_COEFFICIENT Value=1.5e-19
+
+RAD_RECOMB_CONST Value=1.5e-10
+
+ELECTRON_ENERGY_LIFETIME Value=1.e-12
+HOLE_ENERGY_LIFETIME Value=1.e-12
+
+QW_RAD_RECOMB_CONST Value=1.54e-4
+
+ELECTRON_COLLISION_FACTOR Value=0.5
+HOLE_COLLISION_FACTOR Value=0.5
+
+# THIS IS FOR n-type AlGaAs (x for qw)
+Alloy=qw-AlGaAs
+
+BAND_GAP Segments=2
+Start_x=0.00 end_x=0.45 Model=Band_gap terms=1.424,1.247,0,-5.405e-4,204
+Start_x=0.45 end_x=1.00 Model=Band_gap terms=1.9,0.125,0.143,-5.405e-4,204
+
+ELECTRON_AFFINITY Segments=2
+Start_x=0.0 end_x=0.45 Model=Band_gap terms=4.07,-0.7482,0,2.702e-4,204
+Start_x=0.45 end_x=1.0 Model=Band_gap terms=3.594,0.3738,-0.143,2.702e-4,204
+
+STATIC_PERMITIVITY Value=13.18,-3.12
 
 THERMAL_CONDUCTIVITY Model=Thermal_Conduct terms=549.356,1,12.7,-13.22,-1.25
 DERIV_THERMAL_CONDUCT Model=Thermal_Conduct terms=-686.695,1,12.7,-13.22,-2.25
